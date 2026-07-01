@@ -521,6 +521,7 @@
 
         .install-tabs {
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 16px;
         }
@@ -555,6 +556,48 @@
 
         .install-code .comment {
             color: #94a3b8;
+        }
+
+        .install-code strong {
+            color: white;
+            font-family: inherit;
+        }
+
+        .install-code a {
+            color: #bfdbfe;
+            text-decoration: none;
+        }
+
+        .install-code a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .install-note {
+            color: #dbeafe;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.7;
+            padding-right: 88px;
+        }
+
+        .install-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.14);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .install-action:hover {
+            background: rgba(255, 255, 255, 0.24);
+            text-decoration: none;
         }
 
         .copy-btn {
@@ -1255,7 +1298,7 @@
                         <div class="stat-label">外部依赖</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value">12</div>
+                        <div class="stat-value">249</div>
                         <div class="stat-label">翻译语言</div>
                     </div>
                 </div>
@@ -1273,7 +1316,7 @@
                     <div class="icon blue"><i class="fas fa-globe"></i></div>
                     <div>
                         <div class="text">多语言支持</div>
-                        <div class="subtext">12 种语言一键切换</div>
+                        <div class="subtext">Google Translate 在线翻译</div>
                     </div>
                 </div>
             </div>
@@ -1302,7 +1345,7 @@
                 <div class="feature-card animate-on-scroll">
                     <div class="feature-icon green"><i class="fas fa-search"></i></div>
                     <h3>SEO 与多语言</h3>
-                    <p>全站 SEO 字段、robots.txt、sitemap.xml、OG 标签和 Google Translate 集成，面向海外买家优化。</p>
+                    <p>全站 SEO 字段、robots.txt、sitemap.xml、OG 标签和 Google Translate 在线翻译集成，支持 249 种语言。</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <div class="feature-icon orange"><i class="fas fa-wand-magic-sparkles"></i></div>
@@ -1333,15 +1376,12 @@
             </div>
             <div class="install-box">
                 <div class="install-tabs">
-                    <button class="install-tab active">Git Clone</button>
-                    <button class="install-tab">下载 ZIP</button>
+                    <button class="install-tab active" type="button" data-install-tab="git">Git Clone</button>
+                    <button class="install-tab" type="button" data-install-tab="zip">下载 ZIP</button>
+                    <button class="install-tab" type="button" data-install-tab="cloud">云端部署</button>
                 </div>
                 <div class="install-code">
-                    <span class="comment"># 1. 克隆项目</span><br>
-                    git clone https://github.com/zhpelo/shopagg-b2b-website.git<br><br>
-                    <span class="comment"># 2. 设置运行目录权限</span><br>
-                    chmod -R 755 storage uploads<br><br>
-                    <span class="comment"># 3. 访问网站，自动初始化 SQLite 数据库</span>
+                    <div id="installCodeContent"></div>
                     <button class="copy-btn" onclick="copyCode()"><i class="fas fa-copy"></i> 复制</button>
                 </div>
             </div>
@@ -1632,18 +1672,118 @@
             observer.observe(el);
         });
 
-        // Copy code
-        function copyCode() {
-            const code = `git clone https://github.com/zhpelo/shopagg-b2b-website.git
+        const installContent = {
+            git: {
+                copyLabel: '复制',
+                copyText: `git clone https://github.com/zhpelo/shopagg-b2b-website.git
 cd shopagg-b2b-website
-chmod -R 755 storage uploads`;
-            navigator.clipboard.writeText(code).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+chmod -R 755 storage uploads`,
+                html: `
+                    <span class="comment"># 1. 克隆项目</span><br>
+                    git clone https://github.com/zhpelo/shopagg-b2b-website.git<br><br>
+                    <span class="comment"># 2. 设置运行目录权限</span><br>
+                    chmod -R 755 storage uploads<br><br>
+                    <span class="comment"># 3. 访问网站，自动初始化 SQLite 数据库</span>
+                `
+            },
+            zip: {
+                copyLabel: '复制链接',
+                copyText: `https://github.com/zhpelo/shopagg-b2b-website/archive/refs/heads/main.zip`,
+                html: `
+                    <span class="comment"># 1. 下载最新版 ZIP 源码包</span><br>
+                    <a href="https://github.com/zhpelo/shopagg-b2b-website/archive/refs/heads/main.zip" target="_blank">https://github.com/zhpelo/shopagg-b2b-website/archive/refs/heads/main.zip</a><br><br>
+                    <span class="comment"># 2. 上传并解压到服务器网站目录</span><br>
+                    unzip shopagg-b2b-website-main.zip<br><br>
+                    <span class="comment"># 3. 设置 storage / uploads 可写，访问域名自动初始化</span>
+                `
+            },
+            cloud: {
+                copyLabel: '复制链接',
+                copyText: `https://www.shopagg.com/dashboard/b2b-sites/create`,
+                html: `
+                    <div class="install-note">
+                        <strong>不想做技术部署？</strong><br>
+                        进入 SHOPAGG 云端部署平台，按页面提示填写站点信息，点点鼠标即可自动创建一个 B2B 网站，不需要配置服务器、上传代码或设置运行环境。
+                    </div>
+                    <a class="install-action" href="https://www.shopagg.com/dashboard/b2b-sites/create" target="_blank" rel="noopener">
+                        <i class="fas fa-cloud-arrow-up"></i> 打开云端部署平台
+                    </a>
+                `
+            }
+        };
+
+        let currentInstallTab = 'git';
+
+        function renderInstallContent(tabKey) {
+            const content = installContent[tabKey] || installContent.git;
+            currentInstallTab = tabKey in installContent ? tabKey : 'git';
+            const target = document.getElementById('installCodeContent');
+            const copyButton = document.querySelector('.copy-btn');
+            if (target) {
+                target.innerHTML = content.html;
+            }
+            if (copyButton) {
+                copyButton.innerHTML = `<i class="fas fa-copy"></i> ${content.copyLabel}`;
+            }
+        }
+
+        renderInstallContent(currentInstallTab);
+
+        function fallbackCopyText(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            textarea.style.top = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            textarea.setSelectionRange(0, textarea.value.length);
+            let copied = false;
+            try {
+                copied = document.execCommand('copy');
+            } catch (error) {
+                copied = false;
+            }
+            document.body.removeChild(textarea);
+            return copied;
+        }
+
+        function updateCopyButton(label, icon = 'fa-copy') {
+            const btn = document.querySelector('.copy-btn');
+            if (btn) {
+                btn.innerHTML = `<i class="fas ${icon}"></i> ${label}`;
+            }
+        }
+
+        // Copy current install command or link
+        function copyCode() {
+            const content = installContent[currentInstallTab] || installContent.git;
+            const code = content.copyText;
+            const resetLabel = () => {
+                updateCopyButton(content.copyLabel);
+            };
+            const markCopied = () => {
+                updateCopyButton('已复制', 'fa-check');
                 setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-copy"></i> 复制';
+                    resetLabel();
                 }, 2000);
-            });
+            };
+            const markFailed = () => {
+                updateCopyButton('复制失败', 'fa-triangle-exclamation');
+                setTimeout(() => {
+                    resetLabel();
+                }, 2000);
+            };
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(code).then(markCopied).catch(() => {
+                    fallbackCopyText(code) ? markCopied() : markFailed();
+                });
+                return;
+            }
+
+            fallbackCopyText(code) ? markCopied() : markFailed();
         }
 
         // Install tabs
@@ -1651,6 +1791,7 @@ chmod -R 755 storage uploads`;
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.install-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
+                renderInstallContent(this.dataset.installTab);
             });
         });
 
