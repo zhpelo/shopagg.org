@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SHOPAGG B2B Website 开发文档：MVC 架构、路由、SQLite 迁移、数据模型、主题开发、模板区块和验收清单。">
+    <meta name="keywords" content="SHOPAGG 开发文档, PHP MVC, SQLite 迁移, B2B 网站主题开发, 模板区块">
+    <meta property="og:title" content="SHOPAGG 开发文档">
+    <meta property="og:description" content="面向开发者和主题作者的 SHOPAGG 架构与扩展指南。">
+    <meta property="og:type" content="website">
+    <title>开发文档 - SHOPAGG B2B Website</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236366f1'/%3E%3Cpath d='M32 14 48 23v18L32 50 16 41V23l16-9Z' fill='none' stroke='white' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M32 31 48 23M32 31 16 23M32 31v19' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fas fa-cube"></i></div>
+                <span>SHOPAGG</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">功能特性</a></li>
+                <li><a href="index.html#getstarted">快速开始</a></li>
+                <li><a href="index.html#demo">在线演示</a></li>
+                <li><a href="usage.html">使用文档</a></li>
+                <li><a href="developer.html" class="active">开发文档</a></li>
+                <li><a href="index.html#about">关于</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" class="btn btn-outline">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="usage.html" class="btn btn-primary">使用文档</a>
+            </div>
+            <button class="mobile-menu-btn" type="button" aria-label="打开菜单" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="mobile-panel" id="mobilePanel">
+            <a href="index.html#features">功能特性</a>
+            <a href="index.html#getstarted">快速开始</a>
+            <a href="index.html#demo">在线演示</a>
+            <a href="usage.html">使用文档</a>
+            <a href="developer.html">开发文档</a>
+            <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank">GitHub</a>
+        </div>
+    </nav>
+
+    <header class="doc-hero">
+        <div class="container hero-grid">
+            <div>
+                <div class="page-badge"><i class="fas fa-code"></i> 开发文档</div>
+                <h1>面向扩展与主题开发的技术说明</h1>
+                <p>SHOPAGG 使用纯 PHP MVC、SQLite3、版本化迁移和前后台分离主题机制。本文档整理源码结构、扩展流程、模板规范和上线前技术验收点。</p>
+                <div class="hero-actions">
+                    <a href="#architecture" class="btn btn-primary"><i class="fas fa-diagram-project"></i> 查看架构</a>
+                    <a href="#themes" class="btn btn-outline"><i class="fas fa-palette"></i> 主题规范</a>
+                </div>
+            </div>
+            <div class="hero-panel">
+                <div class="panel-title"><i class="fas fa-screwdriver-wrench"></i> 技术摘要</div>
+                <ul class="quick-list">
+                    <li><i class="fas fa-check"></i><span>运行环境：PHP 8.1+，需要 <code>sqlite3</code>、<code>mbstring</code>、<code>fileinfo</code>。</span></li>
+                    <li><i class="fas fa-check"></i><span>架构：<code>index.php</code> 单入口，PSR-4 自动加载，<code>app/routes.php</code> 集中注册路由。</span></li>
+                    <li><i class="fas fa-check"></i><span>数据：SQLite 文件数据库，迁移文件按时间戳自动执行。</span></li>
+                    <li><i class="fas fa-check"></i><span>主题：<code>themes/{theme}</code> 目录隔离，<code>blocks.php</code> 暴露后台可编辑字段。</span></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="container doc-shell">
+        <aside class="toc">
+            <h2>目录</h2>
+            <a href="#stack">技术栈</a>
+            <a href="#architecture">系统架构</a>
+            <a href="#routes">路由与页面扩展</a>
+            <a href="#migrations">数据库迁移</a>
+            <a href="#data-model">数据模型</a>
+            <a href="#themes">主题开发</a>
+            <a href="#security">安全规范</a>
+            <a href="#checklist">验收清单</a>
+        </aside>
+
+        <article class="doc-content">
+            <section class="doc-section" id="stack">
+                <h2>技术栈</h2>
+                <p>项目坚持零框架、零构建的部署体验，但内部仍然按清晰层次组织代码，便于后续扩展。</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>层次</th>
+                                <th>技术</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>后端</td>
+                                <td>PHP 8.1+</td>
+                                <td>纯 PHP 实现，不依赖 Composer 包。</td>
+                            </tr>
+                            <tr>
+                                <td>数据库</td>
+                                <td>SQLite3</td>
+                                <td>文件数据库，默认存储在 <code>storage/site.db</code>，支持 WAL 模式。</td>
+                            </tr>
+                            <tr>
+                                <td>架构</td>
+                                <td>MVC + Router</td>
+                                <td>控制器、模型、视图分层，集中路由注册。</td>
+                            </tr>
+                            <tr>
+                                <td>前台主题</td>
+                                <td>Tailwind CSS CDN</td>
+                                <td>主题模板优先使用 Tailwind 类名，避免重样式侵入核心。</td>
+                            </tr>
+                            <tr>
+                                <td>后台编辑</td>
+                                <td>Jodit / SortableJS / Font Awesome</td>
+                                <td>富文本、拖拽排序、图标和后台界面能力按需加载。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="doc-section" id="architecture">
+                <h2>系统架构</h2>
+                <p>请求从 Web 服务器重写到 <code>index.php</code>，入口文件完成环境初始化、自动加载、辅助函数加载、数据库连接和路由分发。</p>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3><i class="fas fa-signs-post"></i> 入口与路由</h3>
+                        <p><code>index.php</code> 是唯一入口；<code>app/routes.php</code> 注册前台、后台、媒体、更新、主题、区块、菜单和轮播图路由。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-cubes"></i> 核心模块</h3>
+                        <p><code>Router</code>、<code>Controller</code>、<code>Database</code>、<code>Migrator</code>、<code>AuthManager</code>、<code>MediaManager</code> 构成系统基础层。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-table"></i> 模型层</h3>
+                        <p>模型继承 <code>BaseModel</code>，封装 SQLite 操作。产品、文章、分类、询盘、留言、用户、菜单、轮播图等均有独立模型。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-window-restore"></i> 视图层</h3>
+                        <p>前台视图位于 <code>themes/default/</code>，后台视图位于 <code>app/views/admin/</code>，主题与后台管理界面互相隔离。</p>
+                    </div>
+                </div>
+                <pre><code>HTTP 请求
+  -> Apache/Nginx 重写到 index.php
+  -> 定义常量、Session、错误处理
+  -> PSR-4 自动加载 App\ 命名空间
+  -> 加载 app/Helpers/Helpers.php
+  -> Database::getInstance() 并执行待处理迁移
+  -> Router 匹配 app/routes.php
+  -> Controller 调用 Model
+  -> 渲染后台视图或 themes/{theme} 前台模板</code></pre>
+            </section>
+
+            <section class="doc-section" id="routes">
+                <h2>路由与页面扩展</h2>
+                <p>新增前台页面通常只需要注册路由、增加控制器方法和创建主题模板。不要把页面逻辑直接写进入口文件。</p>
+                <pre><code>// 1. app/routes.php 注册路由
+$router->add('GET', '/faq', [SiteController::class, 'faq']);
+
+// 2. SiteController 添加方法
+public function faq(): void
+{
+    $this->renderSite('faq', [
+        'seo' => ['title' => 'FAQ']
+    ]);
+}
+
+// 3. themes/default/faq.php 创建模板
+// 使用 h()、url()、asset_url() 输出动态内容</code></pre>
+                <div class="callout">
+                    <strong>扩展原则：</strong>前台路由放在 SiteController，后台管理路由放在 AdminController；共用数据访问逻辑放入 Model；重复渲染逻辑放入主题 <code>functions.php</code>。
+                </div>
+            </section>
+
+            <section class="doc-section" id="migrations">
+                <h2>数据库迁移</h2>
+                <p>数据库结构演进通过 <code>app/Migrations/</code> 下的时间戳文件管理。系统初始化数据库或发现新迁移时会自动执行，避免手动导入 SQL。</p>
+                <pre><code>// app/Migrations/20260412120000_create_faqs_table.php
+return new class {
+    public function up(SQLite3 $db): void
+    {
+        $db->exec('CREATE TABLE IF NOT EXISTS faqs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            question TEXT NOT NULL,
+            answer TEXT NOT NULL,
+            sort_order INTEGER DEFAULT 0,
+            created_at TEXT NOT NULL
+        )');
+    }
+
+    public function down(SQLite3 $db): void
+    {
+        $db->exec('DROP TABLE IF EXISTS faqs');
+    }
+};</code></pre>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3><i class="fas fa-clock"></i> 命名方式</h3>
+                        <p>文件名使用时间戳前缀，保证迁移执行顺序稳定，例如 <code>20260617000000_create_app_store_theme_installs_table.php</code>。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-rotate"></i> 更新维护</h3>
+                        <p>后台程序更新页可查看迁移状态，必要时手动触发待处理迁移。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="doc-section" id="data-model">
+                <h2>数据模型</h2>
+                <p>系统围绕外贸官网常见业务建模：用户、站点设置、产品、内容、询盘、留言、媒体、菜单、轮播和更新记录。</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>模型 / 表</th>
+                                <th>用途</th>
+                                <th>扩展提示</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>User</code> / <code>users</code></td>
+                                <td>后台管理员与 Staff 账号，包含角色和权限。</td>
+                                <td>新增后台模块时同步检查权限映射。</td>
+                            </tr>
+                            <tr>
+                                <td><code>Product</code> / <code>products</code></td>
+                                <td>产品标题、Slug、分类、图片、摘要、SEO 等。</td>
+                                <td>价格区间使用 <code>product_prices</code> 独立表。</td>
+                            </tr>
+                            <tr>
+                                <td><code>PostModel</code> / <code>posts</code></td>
+                                <td>文章、案例、自定义页面共用内容表。</td>
+                                <td>通过 <code>post_type</code> 区分 <code>post</code>、<code>case</code>、<code>page</code>。</td>
+                            </tr>
+                            <tr>
+                                <td><code>Inquiry</code> / <code>inquiries</code></td>
+                                <td>产品询盘、状态流转、导出和详情查看。</td>
+                                <td>接 CRM 时优先从这里对接。</td>
+                            </tr>
+                            <tr>
+                                <td><code>Slider</code> / <code>sliders</code></td>
+                                <td>轮播图区块和轮播图片管理。</td>
+                                <td>主题首屏轮播应读取此模型，不要在区块里逐张硬编码。</td>
+                            </tr>
+                            <tr>
+                                <td><code>Menu</code> / <code>menus</code></td>
+                                <td>多菜单、多级菜单和拖拽排序。</td>
+                                <td>常用 Slug 包括 <code>main-nav</code> 与 <code>footer</code>。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="doc-section" id="themes">
+                <h2>主题开发</h2>
+                <p>主题是 SHOPAGG 的主要扩展面。主题目录只负责前台展示和可配置区块，不应修改核心表结构或破坏用户数据。</p>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3><i class="fas fa-folder-tree"></i> 目录结构</h3>
+                        <p>完整主题建议包含 <code>header.php</code>、<code>footer.php</code>、<code>home.php</code>、产品/文章/案例/页面模板、<code>blocks.php</code>、<code>functions.php</code>、<code>style.css</code> 和 <code>screenshot.jpg</code>。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-sliders"></i> 区块系统</h3>
+                        <p><code>blocks.php</code> 返回区块定义，后台用户值保存在 <code>storage/blocks/{theme}.php</code>，用户值覆盖主题默认值。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-boxes-stacked"></i> 产品选择器</h3>
+                        <p>所有产品展示区块应使用 <code>product_picker</code>，不要让用户在文本框手填产品 ID。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-photo-film"></i> 媒体选择器</h3>
+                        <p>图片、视频、文件使用 <code>image</code> 或 <code>media</code> 字段；轮播使用 <code>select</code> 选择后台轮播图。</p>
+                    </div>
+                </div>
+                <pre><code>/*
+Theme Name: Furniture
+Theme URI: https://example.com
+Author: Your Name
+Description: B2B furniture website theme.
+Version: 1.0.0
+License: MIT
+*/
+
+// blocks.php
+return [
+    'home_featured' => [
+        'label' => '首页 - 热销产品',
+        'description' => '使用产品选择器勾选展示商品。',
+        'fields' => [
+            'heading' => ['type' => 'text', 'label' => '标题', 'default' => 'Hot Products'],
+            'product_ids' => [
+                'type' => 'product_picker',
+                'label' => '勾选商品列表',
+                'default' => '',
+                'limit' => 8,
+                'status' => 'active',
+            ],
+        ],
+    ],
+];</code></pre>
+            </section>
+
+            <section class="doc-section" id="security">
+                <h2>安全规范</h2>
+                <p>模板和扩展代码必须尊重系统的安全边界，尤其是后台配置值、媒体路径、URL 和上传文件。</p>
+                <div class="step-grid">
+                    <div class="step-card">
+                        <h3><i class="fas fa-shield-halved"></i> 输出转义</h3>
+                        <p>文本和属性使用 <code>h()</code>，多行文本使用 <code>nl2br(h(...))</code>，避免直接输出后台配置值。</p>
+                    </div>
+                    <div class="step-card">
+                        <h3><i class="fas fa-link"></i> URL 与媒体</h3>
+                        <p>站内链接使用 <code>url('/path')</code>，上传文件或相对路径使用 <code>asset_url($path)</code>。</p>
+                    </div>
+                    <div class="step-card">
+                        <h3><i class="fas fa-database"></i> 数据操作</h3>
+                        <p>不要在主题代码中写数据库、删文件、重置配置或执行破坏性操作。</p>
+                    </div>
+                    <div class="step-card">
+                        <h3><i class="fas fa-upload"></i> 上传校验</h3>
+                        <p>主题 zip 必须包含合法 <code>style.css</code> 元数据和必需模板文件，上传媒体由 MediaManager 统一处理。</p>
+                    </div>
+                </div>
+                <pre><code>&lt;h2&gt;&lt;?= h(block('home_about', 'heading')) ?&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;?= nl2br(h(block('home_about', 'text'))) ?&gt;&lt;/p&gt;
+&lt;a href="&lt;?= h(url('/products')) ?&gt;"&gt;Products&lt;/a&gt;
+&lt;img src="&lt;?= h(asset_url($image)) ?&gt;" alt="&lt;?= h($title) ?&gt;"&gt;</code></pre>
+            </section>
+
+            <section class="doc-section" id="checklist">
+                <h2>验收清单</h2>
+                <p>新增功能或主题交付前，至少完成语法、字段、数据和响应式检查。以下命令来自项目文档中的主题质量要求。</p>
+                <pre><code># PHP 语法检查
+find themes/{theme_name} -name '*.php' -print0 | xargs -0 -n1 php -l
+
+# 检查产品选择器、媒体字段和轮播下拉
+rg "product_picker|media_type_key|slider_slug|type' => 'select'" themes/{theme_name}/blocks.php
+
+# 检查是否存在可疑静态产品字段
+rg "item[0-9]+_(title|image|url)" themes/{theme_name}/blocks.php</code></pre>
+                <div class="checklist">
+                    <div class="check-item"><i class="fas fa-check-circle"></i><span>主题目录包含必需模板文件，<code>style.css</code> 有主题元数据，<code>screenshot.jpg</code> 存在。</span></div>
+                    <div class="check-item"><i class="fas fa-check-circle"></i><span>产品展示使用 <code>product_picker</code>，未选择产品时有真实数据兜底或空状态。</span></div>
+                    <div class="check-item"><i class="fas fa-check-circle"></i><span>图片、视频、文件使用 <code>image</code> 或 <code>media</code> 字段，轮播使用后台轮播数据。</span></div>
+                    <div class="check-item"><i class="fas fa-check-circle"></i><span>所有动态文本、链接和媒体路径经过转义或辅助函数处理。</span></div>
+                    <div class="check-item"><i class="fas fa-check-circle"></i><span>移动端、平板、桌面布局不重叠、不溢出，空数据状态不报错。</span></div>
+                    <div class="check-item"><i class="fas fa-check-circle"></i><span>不删除或覆盖用户已有的 <code>storage/blocks/{theme}.php</code> 配置。</span></div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo" style="color: white;">
+                        <div class="logo-icon"><i class="fas fa-cube"></i></div>
+                        <span>SHOPAGG</span>
+                    </a>
+                    <p>轻量级外贸企业 B2B 官网系统，采用 PHP + SQLite、MVC、主题区块和版本化迁移设计。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>产品</h4>
+                    <ul>
+                        <li><a href="index.html#features">功能特性</a></li>
+                        <li><a href="index.html#demo">在线演示</a></li>
+                        <li><a href="usage.html">使用文档</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>开发</h4>
+                    <ul>
+                        <li><a href="#architecture">技术架构</a></li>
+                        <li><a href="#migrations">数据库迁移</a></li>
+                        <li><a href="#themes">主题开发</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>社区</h4>
+                    <ul>
+                        <li><a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank">GitHub</a></li>
+                        <li><a href="https://github.com/zhpelo/shopagg-b2b-website/issues" target="_blank">Issues</a></li>
+                        <li><a href="https://github.com/zhpelo/shopagg-b2b-website/pulls" target="_blank">Pull Requests</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2024-2026 SHOPAGG. Released under the MIT License.</span>
+                <span>Source: zhpelo/shopagg-b2b-website</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobilePanel').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

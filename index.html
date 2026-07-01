@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SHOPAGG B2B Website - 专为外贸企业打造的开源建站系统。基于 PHP 8 + SQLite，零依赖、开箱即用。">
-    <meta name="keywords" content="B2B网站, 外贸建站, 开源CMS, PHP建站系统, 企业官网">
+    <meta name="description" content="SHOPAGG B2B Website - 专为外贸企业打造的开源 B2B 官网系统。基于 PHP 8.1+ 与 SQLite，内置后台管理、主题区块、询盘和多语言能力。">
+    <meta name="keywords" content="B2B网站, 外贸建站, 开源CMS, PHP建站系统, SQLite CMS, 企业官网">
     <meta property="og:title" content="SHOPAGG B2B Website - 开源外贸建站系统">
     <meta property="og:description" content="轻量、灵活、开源的现代 B2B 企业官网系统">
     <meta property="og:type" content="website">
-    <title>SHOPAGG B2B Website - 开源外贸建站系统</title>
+    <title>SHOPAGG B2B Website - 开源 B2B 官网系统</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236366f1'/%3E%3Cpath d='M32 14 48 23v18L32 50 16 41V23l16-9Z' fill='none' stroke='white' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M32 31 48 23M32 31 16 23M32 31v19' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -97,7 +98,7 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 22px;
             list-style: none;
         }
 
@@ -132,6 +133,7 @@
             transition: all 0.2s;
             cursor: pointer;
             border: none;
+            white-space: nowrap;
         }
 
         .btn-outline {
@@ -177,6 +179,26 @@
             font-size: 1.5rem;
             color: var(--dark);
             cursor: pointer;
+        }
+
+        .mobile-panel {
+            display: none;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+        }
+
+        .mobile-panel.open {
+            display: block;
+        }
+
+        .mobile-panel a {
+            display: block;
+            padding: 14px 24px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            border-bottom: 1px solid #f1f5f9;
         }
 
         /* ==================== Hero Section ==================== */
@@ -263,6 +285,7 @@
         .hero-buttons {
             display: flex;
             gap: 16px;
+            flex-wrap: wrap;
             margin-bottom: 48px;
         }
 
@@ -1017,6 +1040,15 @@
 
         /* ==================== Responsive ==================== */
         @media (max-width: 1024px) {
+            .nav-links,
+            .nav-buttons {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
             .hero .container {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -1114,6 +1146,11 @@
                 align-items: center;
             }
 
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
             .footer-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -1158,7 +1195,7 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <div class="logo-icon"><i class="fas fa-cube"></i></div>
                 <span>SHOPAGG</span>
             </a>
@@ -1166,7 +1203,8 @@
                 <li><a href="#features">功能特性</a></li>
                 <li><a href="#getstarted">快速开始</a></li>
                 <li><a href="#demo">在线演示</a></li>
-                <li><a href="#community">社区</a></li>
+                <li><a href="usage.html">使用文档</a></li>
+                <li><a href="developer.html">开发文档</a></li>
                 <li><a href="#about">关于</a></li>
             </ul>
             <div class="nav-buttons">
@@ -1175,9 +1213,17 @@
                 </a>
                 <a href="https://demo.shopagg.org/" target="_blank" class="btn btn-primary">立即体验</a>
             </div>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <button class="mobile-menu-btn" type="button" aria-label="打开菜单" onclick="toggleMobileMenu()">
                 <i class="fas fa-bars"></i>
             </button>
+        </div>
+        <div class="mobile-panel" id="mobilePanel">
+            <a href="#features">功能特性</a>
+            <a href="#getstarted">快速开始</a>
+            <a href="#demo">在线演示</a>
+            <a href="usage.html">使用文档</a>
+            <a href="developer.html">开发文档</a>
+            <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank">GitHub</a>
         </div>
     </nav>
 
@@ -1187,10 +1233,10 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <i class="fas fa-rocket"></i>
-                    <span>v1.0 正式发布</span>
+                    <span>v1.1.9 当前版本</span>
                 </div>
-                <h1>轻量、灵活、开源的 B2B 建站系统</h1>
-                <p>专为外贸企业打造的现代化官网解决方案。基于 PHP 8 + SQLite，零依赖、开箱即用，助力企业快速上线专业官网。</p>
+                <h1>PHP + SQLite 的开源 B2B 官网系统</h1>
+                <p>专为外贸企业打造的轻量级官网系统。采用标准 MVC 架构，内置产品、内容、询盘、媒体、主题、区块、菜单、轮播和更新能力，上传即可自动初始化。</p>
                 <div class="hero-buttons">
                     <a href="#getstarted" class="btn btn-primary btn-lg">
                         <i class="fas fa-play"></i> 快速开始
@@ -1201,16 +1247,16 @@
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <div class="stat-value">100%</div>
-                        <div class="stat-label">开源免费</div>
+                        <div class="stat-value">1.1.9</div>
+                        <div class="stat-label">当前版本</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value">0</div>
                         <div class="stat-label">外部依赖</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value">5min</div>
-                        <div class="stat-label">快速部署</div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">翻译语言</div>
                     </div>
                 </div>
             </div>
@@ -1227,7 +1273,7 @@
                     <div class="icon blue"><i class="fas fa-globe"></i></div>
                     <div>
                         <div class="text">多语言支持</div>
-                        <div class="subtext">中英文自由切换</div>
+                        <div class="subtext">12 种语言一键切换</div>
                     </div>
                 </div>
             </div>
@@ -1239,39 +1285,39 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-badge"><i class="fas fa-sparkles"></i> 功能特性</div>
-                <h2 class="section-title">为外贸企业量身打造</h2>
-                <p class="section-desc">从产品展示到询单管理，一站式解决 B2B 企业官网需求</p>
+                <h2 class="section-title">从官网展示到后台运营</h2>
+                <p class="section-desc">当前版本已经覆盖外贸官网、内容管理、询盘跟进、主题扩展和程序维护的完整闭环</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon purple"><i class="fas fa-box"></i></div>
-                    <h3>产品展示</h3>
-                    <p>支持多图轮播、阶梯定价、规格参数，完美展示您的产品优势</p>
+                    <div class="feature-icon purple"><i class="fas fa-boxes-stacked"></i></div>
+                    <h3>产品与内容中台</h3>
+                    <p>产品、分类、阶梯价格、博客、案例和自定义页面统一管理，适合长期运营外贸内容资产。</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon blue"><i class="fas fa-language"></i></div>
-                    <h3>多语言支持</h3>
-                    <p>内置中英文切换，可轻松扩展更多语言，触达全球客户</p>
+                    <div class="feature-icon blue"><i class="fas fa-inbox"></i></div>
+                    <h3>收件箱与询盘流程</h3>
+                    <p>联系留言和产品询单分组处理，支持待处理、已联系、已报价、已关闭状态和 CSV 导出。</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <div class="feature-icon green"><i class="fas fa-search"></i></div>
-                    <h3>SEO 优化</h3>
-                    <p>伪静态路由、自动 Sitemap、独立 TDK 设置，提升搜索排名</p>
+                    <h3>SEO 与多语言</h3>
+                    <p>全站 SEO 字段、robots.txt、sitemap.xml、OG 标签和 Google Translate 集成，面向海外买家优化。</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon orange"><i class="fas fa-file-invoice"></i></div>
-                    <h3>询单管理</h3>
-                    <p>产品询单、联系留言统一管理，状态跟踪不遗漏商机</p>
+                    <div class="feature-icon orange"><i class="fas fa-wand-magic-sparkles"></i></div>
+                    <h3>主题、区块与轮播</h3>
+                    <p>前后台主题分离，后台可改文案、图片、按钮、菜单和轮播；主题 zip 包支持校验上传。</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon pink"><i class="fas fa-palette"></i></div>
-                    <h3>主题切换</h3>
-                    <p>支持多主题系统，快速定制企业专属风格</p>
+                    <div class="feature-icon pink"><i class="fas fa-store"></i></div>
+                    <h3>主题商店扩展</h3>
+                    <p>源码已包含主题商店安装记录和远程主题服务，为后续模板生态和商业主题分发预留能力。</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <div class="feature-icon cyan"><i class="fas fa-shield-alt"></i></div>
-                    <h3>安全可靠</h3>
-                    <p>CSRF 防护、密码加密、权限控制，保障数据安全</p>
+                    <h3>安全、权限与更新</h3>
+                    <p>CSRF、上传校验、响应头、角色权限、程序更新和数据库迁移状态检查，降低上线维护风险。</p>
                 </div>
             </div>
         </div>
@@ -1283,7 +1329,7 @@
             <div class="section-header">
                 <div class="section-badge"><i class="fas fa-terminal"></i> 快速开始</div>
                 <h2 class="section-title">5 分钟完成部署</h2>
-                <p class="section-desc">无需复杂配置，克隆代码即可运行</p>
+                <p class="section-desc">无需 Composer、Node.js 或构建工具，上传文件后首次访问自动创建数据库和默认数据</p>
             </div>
             <div class="install-box">
                 <div class="install-tabs">
@@ -1291,29 +1337,29 @@
                     <button class="install-tab">下载 ZIP</button>
                 </div>
                 <div class="install-code">
-                    <span class="comment"># 克隆项目</span><br>
+                    <span class="comment"># 1. 克隆项目</span><br>
                     git clone https://github.com/zhpelo/shopagg-b2b-website.git<br><br>
-                    <span class="comment"># 设置权限</span><br>
-                    chmod -R 755 #data/ uploads/<br><br>
-                    <span class="comment"># 访问网站，自动初始化数据库</span>
+                    <span class="comment"># 2. 设置运行目录权限</span><br>
+                    chmod -R 755 storage uploads<br><br>
+                    <span class="comment"># 3. 访问网站，自动初始化 SQLite 数据库</span>
                     <button class="copy-btn" onclick="copyCode()"><i class="fas fa-copy"></i> 复制</button>
                 </div>
             </div>
             <div class="requirements">
                 <div class="requirement">
                     <i class="fab fa-php"></i>
-                    <h4>PHP 8.0+</h4>
-                    <p>推荐 PHP 8.4</p>
+                    <h4>PHP 8.1+</h4>
+                    <p>需要 mbstring / fileinfo</p>
                 </div>
                 <div class="requirement">
                     <i class="fas fa-database"></i>
                     <h4>SQLite3</h4>
-                    <p>无需 MySQL</p>
+                    <p>文件数据库，自动迁移</p>
                 </div>
                 <div class="requirement">
                     <i class="fas fa-server"></i>
                     <h4>Apache / Nginx</h4>
-                    <p>内置伪静态规则</p>
+                    <p>支持根目录和子目录部署</p>
                 </div>
             </div>
         </div>
@@ -1330,13 +1376,13 @@
             <div class="demo-container">
                 <div class="demo-content">
                     <h3>功能完备的后台管理</h3>
-                    <p>现代化的管理界面，让内容管理变得简单高效。支持产品、文章、案例、询单等全方位管理。</p>
+                    <p>现代化的管理界面，让内容、商品、客户消息和网站外观都能在后台完成维护。管理员可处理程序更新、主题安装和员工权限。</p>
                     <ul class="demo-features">
                         <li><i class="fas fa-check-circle"></i> 可视化仪表盘，数据一目了然</li>
-                        <li><i class="fas fa-check-circle"></i> 富文本编辑器，支持图片上传</li>
-                        <li><i class="fas fa-check-circle"></i> 媒体库管理，统一资源管理</li>
-                        <li><i class="fas fa-check-circle"></i> 多员工账号，权限精细控制</li>
-                        <li><i class="fas fa-check-circle"></i> 响应式设计，手机也能管理</li>
+                        <li><i class="fas fa-check-circle"></i> 收件箱集中处理留言和产品询单</li>
+                        <li><i class="fas fa-check-circle"></i> 媒体库、菜单、轮播图和模板区块统一维护</li>
+                        <li><i class="fas fa-check-circle"></i> 多员工账号，按模块分配最小权限</li>
+                        <li><i class="fas fa-check-circle"></i> 程序更新、备份和迁移状态集中检查</li>
                     </ul>
                     <div class="demo-credentials">
                         <h4>演示账号</h4>
@@ -1372,9 +1418,9 @@
     <section class="community" id="community">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge"><i class="fas fa-users"></i> 社区与支持</div>
-                <h2 class="section-title">加入开源社区</h2>
-                <p class="section-desc">与开发者一起交流、学习、贡献</p>
+                <div class="section-badge"><i class="fas fa-book-open"></i> 文档与支持</div>
+                <h2 class="section-title">按角色阅读文档</h2>
+                <p class="section-desc">面向站点管理员、运营人员和主题开发者分别整理关键流程</p>
             </div>
             <div class="community-grid">
                 <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" class="community-card">
@@ -1382,15 +1428,15 @@
                     <h3>GitHub</h3>
                     <p>查看源码、提交 Issue、贡献代码</p>
                 </a>
-                <a href="#" class="community-card">
-                    <i class="fab fa-discord"></i>
-                    <h3>Discord</h3>
-                    <p>加入社区讨论，获取实时帮助</p>
-                </a>
-                <a href="#" class="community-card">
+                <a href="usage.html" class="community-card">
                     <i class="fas fa-book"></i>
-                    <h3>文档中心</h3>
-                    <p>详细的使用文档和 API 参考</p>
+                    <h3>使用文档</h3>
+                    <p>安装、登录、后台导航、内容维护、询盘处理和上线检查</p>
+                </a>
+                <a href="developer.html" class="community-card">
+                    <i class="fas fa-code"></i>
+                    <h3>开发文档</h3>
+                    <p>MVC 架构、路由、迁移、主题模板、区块规范和验收命令</p>
                 </a>
                 <a href="https://github.com/zhpelo/shopagg-b2b-website/pulls" target="_blank" class="community-card">
                     <i class="fas fa-code-pull-request"></i>
@@ -1405,28 +1451,36 @@
     <section class="showcase" id="showcase">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge"><i class="fas fa-building"></i> 用户案例</div>
-                <h2 class="section-title">谁在使用 SHOPAGG</h2>
-                <p class="section-desc">已有多家企业选择 SHOPAGG 搭建官网</p>
+                <div class="section-badge"><i class="fas fa-layer-group"></i> 架构亮点</div>
+                <h2 class="section-title">轻量，但不是简陋</h2>
+                <p class="section-desc">保持零构建部署，同时给主题、内容和数据演进留下清晰边界</p>
             </div>
-            <div class="showcase-grid">
-                <div class="showcase-item">
-                    <img src="https://www.shopagg.com/wp-content/uploads/2024/12/shopagg-logo-b.png" alt="Company 1">
-                </div>
-                <div class="showcase-item">
-                    <img src="https://www.shopagg.com/wp-content/uploads/2024/12/shopagg-logo-b.png" alt="Company 2">
-                </div>
-                <div class="showcase-item">
-                    <img src="https://www.shopagg.com/wp-content/uploads/2024/12/shopagg-logo-b.png" alt="Company 3">
-                </div>
-                <div class="showcase-item">
-                    <img src="https://www.shopagg.com/wp-content/uploads/2024/12/shopagg-logo-b.png" alt="Company 4">
-                </div>
+            <div class="community-grid">
+                <a href="developer.html#architecture" class="community-card">
+                    <i class="fas fa-diagram-project"></i>
+                    <h3>MVC 单入口</h3>
+                    <p>index.php 初始化环境、自动加载、数据库迁移和路由分发</p>
+                </a>
+                <a href="developer.html#migrations" class="community-card">
+                    <i class="fas fa-database"></i>
+                    <h3>版本化迁移</h3>
+                    <p>新增表结构通过时间戳迁移文件随访问自动执行</p>
+                </a>
+                <a href="developer.html#themes" class="community-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>主题可维护</h3>
+                    <p>区块、媒体、产品选择器和轮播下拉让客户可视化维护</p>
+                </a>
+                <a href="usage.html#launch" class="community-card">
+                    <i class="fas fa-list-check"></i>
+                    <h3>上线清单</h3>
+                    <p>密码、联系方式、主题、菜单、询盘和权限逐项核对</p>
+                </a>
             </div>
             <div class="showcase-cta">
-                <p>您也在使用 SHOPAGG？</p>
-                <a href="https://github.com/zhpelo/shopagg-b2b-website/issues" target="_blank" class="btn btn-outline">
-                    <i class="fas fa-plus"></i> 提交您的案例
+                <p>需要更完整的源码说明？</p>
+                <a href="developer.html" class="btn btn-outline">
+                    <i class="fas fa-arrow-right"></i> 阅读开发文档
                 </a>
             </div>
         </div>
@@ -1439,9 +1493,9 @@
                 <div class="about-text">
                     <div class="section-badge"><i class="fas fa-heart"></i> 关于项目</div>
                     <h3>源于实践，回馈社区</h3>
-                    <p>SHOPAGG B2B Website 诞生于多年的外贸建站经验。我们深知中小外贸企业对专业官网的迫切需求，也了解传统建站方案的痛点。</p>
-                    <p>这个项目旨在提供一个轻量、灵活、易于部署的解决方案，让每一家企业都能快速拥有专业的线上形象。</p>
-                    <p>项目采用 MIT 开源协议，可自由用于个人和商业项目。欢迎 Star、Fork、提交 PR，一起让项目变得更好！</p>
+                    <p>SHOPAGG B2B Website 诞生于外贸建站和企业官网交付场景，目标是在小型主机上也能快速部署、稳定维护、持续扩展。</p>
+                    <p>当前源码已经从早期展示型网站演进为完整后台系统：内容、产品、客户消息、主题、区块、菜单、轮播、媒体、员工权限和程序更新都有清晰模块。</p>
+                    <p>项目采用 MIT 开源协议，可自由用于个人和商业项目。欢迎 Star、Fork、提交 PR，一起完善外贸企业开源建站方案。</p>
                     <div class="about-team">
                         <div class="team-avatars">
                             <div class="avatar">S</div>
@@ -1463,7 +1517,7 @@
                     </div>
                     <div class="about-stat">
                         <i class="fas fa-code"></i>
-                        <div class="value">PHP 8</div>
+                        <div class="value">PHP 8.1+</div>
                         <div class="label">技术栈</div>
                     </div>
                     <div class="about-stat">
@@ -1485,13 +1539,13 @@
     <section class="cta-section">
         <div class="container">
             <h2>准备好开始了吗？</h2>
-            <p>立即部署 SHOPAGG，快速拥有专业的企业官网</p>
+                <p>立即部署 SHOPAGG，或先阅读文档确认安装、运营和扩展流程</p>
             <div class="cta-buttons">
                 <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" class="btn btn-white btn-lg">
                     <i class="fab fa-github"></i> 获取源码
                 </a>
-                <a href="#demo" class="btn btn-ghost btn-lg">
-                    <i class="fas fa-play"></i> 在线体验
+                <a href="usage.html" class="btn btn-ghost btn-lg">
+                    <i class="fas fa-book-open"></i> 阅读使用文档
                 </a>
             </div>
         </div>
@@ -1502,11 +1556,11 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="logo" style="color: white;">
+                    <a href="index.html" class="logo" style="color: white;">
                         <div class="logo-icon"><i class="fas fa-cube"></i></div>
                         <span>SHOPAGG</span>
                     </a>
-                    <p>专为外贸企业打造的开源建站系统。轻量、灵活、易部署，助力企业快速上线专业官网。</p>
+                    <p>专为外贸企业打造的开源建站系统。PHP + SQLite、MVC、零构建部署，覆盖产品展示、内容运营、询盘处理和主题扩展。</p>
                     <div class="footer-social">
                         <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank"><i class="fab fa-github"></i></a>
                         <a href="https://x.com/zhpelo/zhpelo"><i class="fab fa-twitter"></i></a>
@@ -1519,26 +1573,26 @@
                     <ul>
                         <li><a href="#features">功能特性</a></li>
                         <li><a href="#demo">在线演示</a></li>
-                        <li><a href="#">更新日志</a></li>
-                        <li><a href="#">路线图</a></li>
+                        <li><a href="usage.html">使用文档</a></li>
+                        <li><a href="developer.html">开发文档</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>资源</h4>
                     <ul>
-                        <li><a href="#">使用文档</a></li>
-                        <li><a href="#">API 参考</a></li>
-                        <li><a href="#">主题开发</a></li>
-                        <li><a href="#">常见问题</a></li>
+                        <li><a href="usage.html#install">安装部署</a></li>
+                        <li><a href="usage.html#admin">后台使用</a></li>
+                        <li><a href="developer.html#themes">主题开发</a></li>
+                        <li><a href="developer.html#checklist">验收清单</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>社区</h4>
                     <ul>
                         <li><a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank">GitHub</a></li>
-                        <li><a href="#">Discord</a></li>
-                        <li><a href="#">贡献指南</a></li>
-                        <li><a href="#">行为准则</a></li>
+                        <li><a href="https://github.com/zhpelo/shopagg-b2b-website/issues" target="_blank">Issues</a></li>
+                        <li><a href="https://github.com/zhpelo/shopagg-b2b-website/pulls" target="_blank">Pull Requests</a></li>
+                        <li><a href="https://github.com/zhpelo/shopagg-b2b-website/blob/main/LICENSE" target="_blank">MIT License</a></li>
                     </ul>
                 </div>
             </div>
@@ -1581,7 +1635,8 @@
         // Copy code
         function copyCode() {
             const code = `git clone https://github.com/zhpelo/shopagg-b2b-website.git
-chmod -R 755 #data/ uploads/`;
+cd shopagg-b2b-website
+chmod -R 755 storage uploads`;
             navigator.clipboard.writeText(code).then(() => {
                 const btn = document.querySelector('.copy-btn');
                 btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
@@ -1610,12 +1665,9 @@ chmod -R 755 #data/ uploads/`;
             });
         });
 
-        // Mobile menu toggle
         function toggleMobileMenu() {
-            // Simple toggle for mobile - could be expanded
-            alert('移动端菜单功能待完善');
+            document.getElementById('mobilePanel').classList.toggle('open');
         }
     </script>
 </body>
 </html>
-
