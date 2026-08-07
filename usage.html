@@ -9,15 +9,15 @@
     <meta property="og:description" content="面向管理员、运营和销售跟单人员的 SHOPAGG 后台使用指南。">
     <meta property="og:type" content="website">
     <title>使用文档 - SHOPAGG B2B Website</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236366f1'/%3E%3Cpath d='M32 14 48 23v18L32 50 16 41V23l16-9Z' fill='none' stroke='white' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M32 31 48 23M32 31 16 23M32 31v19' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="icon" href="assets/images/icon.webp" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/docs.css">
+    <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="assets/images/logo.webp" style="width: 160px; height: auto;" alt="SHOPAGG Logo" class="logo-image">
+                <img src="assets/images/logo.webp" alt="SHOPAGG Logo" class="logo-image">
             </a>
             <ul class="nav-links">
                 <li><a href="index.html#features">功能特性</a></li>
@@ -61,7 +61,7 @@
             <div class="hero-panel">
                 <div class="panel-title"><i class="fas fa-circle-info"></i> 适用范围</div>
                 <ul class="quick-list">
-                    <li><i class="fas fa-check"></i><span>适用于 SHOPAGG B2B Website v1.1.x，当前源码版本为 v1.1.9。</span></li>
+                    <li><i class="fas fa-check"></i><span>适用于 SHOPAGG B2B Website v1.2.x，当前源码版本为 v1.2.3。</span></li>
                     <li><i class="fas fa-check"></i><span>适合管理员、内容运营、产品维护人员和销售跟单人员阅读。</span></li>
                     <li><i class="fas fa-check"></i><span>后台入口通常为 <code>/admin/login</code>，首次登录后应立即修改默认密码。</span></li>
                     <li><i class="fas fa-check"></i><span>完整源码和原始文档位于 GitHub 仓库的 <code>Documents/</code> 目录。</span></li>
@@ -179,7 +179,7 @@ chmod -R 755 storage uploads
                             </tr>
                             <tr>
                                 <td>产品中心</td>
-                                <td>维护产品、产品分类、图片、摘要、标签、供应商和阶梯价格。</td>
+                                <td>维护产品、产品分类、图片、摘要、标签、供应商、阶梯价格、多规格 SKU、价格区间和面谈价格。</td>
                             </tr>
                             <tr>
                                 <td>内容管理</td>
@@ -211,7 +211,7 @@ chmod -R 755 storage uploads
                         <ul>
                             <li>产品标题、描述、摘要、分类、标签、供应商和 SEO 字段。</li>
                             <li>产品图片集与详情图用于前台展示。</li>
-                            <li>阶梯价格支持按采购数量展示不同报价。</li>
+                            <li>价格支持阶梯价格、多规格 SKU、价格区间和面谈价格，并读取全局货币设置。</li>
                             <li>Slug 只允许小写字母、数字和连字符。</li>
                         </ul>
                     </div>
@@ -314,7 +314,7 @@ chmod -R 755 storage uploads
                         <tbody>
                             <tr>
                                 <td>基础设置</td>
-                                <td>网站名称、标语、启用主题、SEO、Logo、Favicon、分享图。</td>
+                                <td>网站名称、标语、全局货币、启用主题、SEO、Logo、Favicon、分享图。</td>
                             </tr>
                             <tr>
                                 <td>公司简介 / 贸易能力</td>
@@ -380,8 +380,8 @@ chmod -R 755 storage uploads
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="index.html" class="logo" style="color: white;">
-                        <img src="assets/images/logo-light.webp" style="width: 160px; height: auto;" alt="SHOPAGG Logo" class="logo-image">
+                    <a href="index.html" class="logo logo-white">
+                        <img src="assets/images/logo-light.webp" alt="SHOPAGG Logo" class="logo-image">
                     </a>
                     <p>轻量级外贸企业 B2B 官网系统，覆盖产品展示、内容运营、询盘处理和主题扩展。</p>
                 </div>
