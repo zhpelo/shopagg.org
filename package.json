@@ -1,0 +1,14 @@
+{
+  "name": "shopagg-b2b-website-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs-src --host 127.0.0.1",
+    "docs:build": "vitepress build docs-src",
+    "docs:preview": "vitepress preview docs-src --host 127.0.0.1"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
+
