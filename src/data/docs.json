@@ -1,5 +1,5 @@
 {
-  "schema": 1,
+  "schema": 2,
   "product": "lighthouse-cms",
   "documents": [
     {
@@ -8,7 +8,15 @@
       "audience": ["administrator", "operator", "sales"],
       "url": "https://shopagg.org/usage",
       "source_format": "markdown",
-      "version": "1.3.4"
+      "version": "1.3.4",
+      "pages": [
+        { "id": "getting-started", "title": "安装与入门", "url": "https://shopagg.org/usage/getting-started" },
+        { "id": "product-management", "title": "产品管理", "url": "https://shopagg.org/usage/product-management" },
+        { "id": "content-and-appearance", "title": "内容与外观", "url": "https://shopagg.org/usage/content-and-appearance" },
+        { "id": "inquiries", "title": "询盘与日常运营", "url": "https://shopagg.org/usage/inquiries" },
+        { "id": "settings-and-extensions", "title": "扩展、设置与权限", "url": "https://shopagg.org/usage/settings-and-extensions" },
+        { "id": "launch-and-faq", "title": "上线检查与常见问题", "url": "https://shopagg.org/usage/launch-and-faq" }
+      ]
     },
     {
       "id": "developer",
@@ -16,7 +24,16 @@
       "audience": ["developer", "plugin-author", "theme-author"],
       "url": "https://shopagg.org/developer",
       "source_format": "markdown",
-      "version": "1.3.4"
+      "version": "1.3.4",
+      "pages": [
+        { "id": "architecture", "title": "架构与核心模块", "url": "https://shopagg.org/developer/architecture" },
+        { "id": "data-model", "title": "数据模型与迁移", "url": "https://shopagg.org/developer/data-model" },
+        { "id": "application-development", "title": "功能开发", "url": "https://shopagg.org/developer/application-development" },
+        { "id": "plugins", "title": "插件开发", "url": "https://shopagg.org/developer/plugins" },
+        { "id": "themes", "title": "主题开发", "url": "https://shopagg.org/developer/themes" },
+        { "id": "security", "title": "认证与安全", "url": "https://shopagg.org/developer/security" },
+        { "id": "operations", "title": "部署、更新与验收", "url": "https://shopagg.org/developer/operations" }
+      ]
     },
     {
       "id": "capabilities",

@@ -1,0 +1,39 @@
+---
+import type { MarkdownInstance } from 'astro';
+import DocLayout from '../../layouts/DocLayout.astro';
+import { usageDocumentation, type DocumentationPage } from '../../data/documentation';
+
+const documents = import.meta.glob('../../content/docs/usage/*.md', { eager: true }) as Record<string, MarkdownInstance<Record<string, never>>>;
+
+export function getStaticPaths() {
+  return usageDocumentation.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+interface Props { page: DocumentationPage }
+const { page } = Astro.props;
+const index = usageDocumentation.findIndex((item) => item.slug === page.slug);
+const previousPage = usageDocumentation[index - 1];
+const nextPage = usageDocumentation[index + 1];
+const document = documents[`../../content/docs/usage/${page.slug}.md`];
+if (!document) throw new Error(`Missing usage document: ${page.slug}`);
+const Content = document.Content;
+const canonicalPath = `/usage/${page.slug}`;
+---
+
+<DocLayout
+  title={`${page.title} - 灯塔 CMS 使用文档`}
+  description={page.summary}
+  heading={page.title}
+  eyebrow="灯塔 CMS 使用文档"
+  intro={page.summary}
+  active="usage"
+  version="1.3.4"
+  modifiedTime="2026-10-12T00:00:00+08:00"
+  {canonicalPath}
+  navigation={usageDocumentation}
+  toc={page.toc}
+  previous={previousPage ? { href: `/usage/${previousPage.slug}`, title: previousPage.title } : undefined}
+  next={nextPage ? { href: `/usage/${nextPage.slug}`, title: nextPage.title } : undefined}
+>
+  <Content />
+</DocLayout>

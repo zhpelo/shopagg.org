@@ -2,18 +2,11 @@
 import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import type { DocumentationPage } from '../data/documentation';
 
-interface LinkAction {
+interface PageLink {
   href: string;
-  label: string;
-  icon: string;
-  style?: string;
-  external?: boolean;
-}
-
-interface TocItem {
-  id: string;
-  label: string;
+  title: string;
 }
 
 interface Props {
@@ -21,21 +14,22 @@ interface Props {
   description: string;
   heading: string;
   eyebrow: string;
-  eyebrowIcon: string;
   intro: string;
   active: 'usage' | 'developer';
-  actions: LinkAction[];
-  quickTitle: string;
-  quickIcon: string;
-  quickItems: string[];
-  toc: TocItem[];
   version: string;
   modifiedTime: string;
+  canonicalPath: string;
+  navigation: DocumentationPage[];
+  toc?: Array<{ id: string; label: string }>;
+  previous?: PageLink;
+  next?: PageLink;
+  overview?: boolean;
 }
 
 const props = Astro.props;
-const canonicalPath = props.active === 'usage' ? '/usage' : '/developer';
-const canonical = new URL(canonicalPath, Astro.site).href;
+const rootPath = props.active === 'usage' ? '/usage' : '/developer';
+const rootLabel = props.active === 'usage' ? '使用文档' : '开发文档';
+const canonical = new URL(props.canonicalPath, Astro.site).href;
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'TechArticle',
@@ -59,41 +53,59 @@ const structuredData = {
 };
 ---
 
-<BaseLayout title={props.title} description={props.description} type="article" modifiedTime={props.modifiedTime} structuredData={structuredData} {canonicalPath}>
+<BaseLayout title={props.title} description={props.description} type="article" modifiedTime={props.modifiedTime} structuredData={structuredData} canonicalPath={props.canonicalPath}>
   <Header active={props.active} />
 
-  <header class="doc-hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="page-badge"><i class={props.eyebrowIcon}></i><span>{props.eyebrow}</span></div>
+  <header class="docs-header">
+    <div class="container">
+      <nav class="docs-breadcrumb" aria-label="面包屑导航">
+        <a href="/">灯塔 CMS</a><i class="fas fa-chevron-right"></i>
+        {props.overview ? <span>{rootLabel}</span> : <><a href={rootPath}>{rootLabel}</a><i class="fas fa-chevron-right"></i><span>{props.heading}</span></>}
+      </nav>
+      <div class="docs-header-copy">
+        <span class="docs-eyebrow">{props.eyebrow}</span>
         <h1>{props.heading}</h1>
         <p>{props.intro}</p>
-        <div class="hero-actions">
-          {props.actions.map((action) => (
-            <a href={action.href} class={`btn ${action.style ?? 'btn-outline'} btn-lg`} target={action.external ? '_blank' : undefined} rel={action.external ? 'noopener' : undefined}>
-              <i class={action.icon}></i> {action.label}
-            </a>
-          ))}
-        </div>
       </div>
-      <aside class="hero-panel">
-        <div class="panel-title"><i class={props.quickIcon}></i>{props.quickTitle}</div>
-        <ul class="quick-list">
-          {props.quickItems.map((item) => <li><i class="fas fa-check-circle"></i><span>{item}</span></li>)}
-        </ul>
-      </aside>
     </div>
   </header>
 
-  <main class="container doc-shell">
-    <aside class="toc" aria-label="文档目录">
-      <h2>文档目录</h2>
-      {props.toc.map((item) => <a href={`#${item.id}`}>{item.label}</a>)}
+  <main class:list={['container', 'docs-shell', { 'docs-shell-no-toc': props.overview || !props.toc || props.toc.length <= 1 }] }>
+    <aside class="docs-sidebar" aria-label={`${rootLabel}章节`}>
+      <div class="docs-sidebar-title"><i class={props.active === 'usage' ? 'fas fa-book-open' : 'fas fa-code'}></i>{rootLabel}</div>
+      <nav>
+        <a href={rootPath} class:list={{ active: props.canonicalPath === rootPath }}><i class="fas fa-house"></i>文档首页</a>
+        {props.navigation.map((item) => (
+          <a href={`${rootPath}/${item.slug}`} class:list={{ active: props.canonicalPath === `${rootPath}/${item.slug}` }}>
+            <i class={item.icon}></i>{item.title}
+          </a>
+        ))}
+      </nav>
+      <div class="docs-sidebar-switch">
+        <span>其他文档</span>
+        <a href={props.active === 'usage' ? '/developer' : '/usage'}>
+          {props.active === 'usage' ? '开发文档' : '使用文档'} <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
     </aside>
-    <article class="doc-content">
+
+    <article class="doc-content docs-article">
       <div class="doc-meta"><span>适用版本：{props.version}</span><span>更新日期：{props.modifiedTime.slice(0, 10)}</span></div>
       <slot />
+      {(props.previous || props.next) && (
+        <nav class="docs-pagination" aria-label="文档翻页">
+          {props.previous ? <a href={props.previous.href} class="previous"><span><i class="fas fa-arrow-left"></i> 上一篇</span><strong>{props.previous.title}</strong></a> : <span></span>}
+          {props.next ? <a href={props.next.href} class="next"><span>下一篇 <i class="fas fa-arrow-right"></i></span><strong>{props.next.title}</strong></a> : <span></span>}
+        </nav>
+      )}
     </article>
+
+    {!props.overview && props.toc && props.toc.length > 1 && (
+      <aside class="docs-page-toc" aria-label="本页目录">
+        <strong>本页目录</strong>
+        {props.toc.map((item) => <a href={`#${item.id}`}>{item.label}</a>)}
+      </aside>
+    )}
   </main>
 
   <Footer />

@@ -1,11 +1,14 @@
 import type { APIRoute } from 'astro';
+import { developerDocumentation, usageDocumentation } from '../data/documentation';
 
 const pages = [
   '/',
   '/capabilities',
   '/releases',
   '/usage',
-  '/developer'
+  ...usageDocumentation.map((page) => `/usage/${page.slug}`),
+  '/developer',
+  ...developerDocumentation.map((page) => `/developer/${page.slug}`)
 ];
 
 export const GET: APIRoute = () => {
