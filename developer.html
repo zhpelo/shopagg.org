@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SHOPAGG B2B Website v1.2.3 开发文档，覆盖 PHP MVC 架构、路由、SQLite 迁移、模型、主题、区块、安全和扩展规范。">
-    <meta property="og:title" content="开发文档 - SHOPAGG B2B Website">
-    <meta property="og:description" content="SHOPAGG B2B Website v1.2.3 开发文档，覆盖 PHP MVC 架构、路由、SQLite 迁移、模型、主题、区块、安全和扩展规范。">
+    <meta name="description" content="灯塔 CMS v1.3.4 开发文档，覆盖 PHP MVC、SQLite 迁移、插件运行时、主题、区块、安全和扩展规范。">
+    <meta property="og:title" content="开发文档 - 灯塔 CMS">
+    <meta property="og:description" content="灯塔 CMS v1.3.4 开发文档，覆盖 MVC 架构、插件 API、主题系统和安全边界。">
     <meta property="og:type" content="article">
-    <title>开发文档 - SHOPAGG B2B Website</title>
-    <link rel="icon" href="assets/images/icon.webp" type="image/x-icon">
+    <title>开发文档 - 灯塔 CMS（Lighthouse CMS）</title>
+    <link rel="icon" href="assets/images/lighthouse-mark.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -17,7 +17,8 @@
     <nav class="navbar" id="navbar">
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="assets/images/logo.webp" alt="SHOPAGG Logo" class="logo-image">
+                <span class="brand-symbol" aria-hidden="true"><i class="fas fa-tower-broadcast"></i></span>
+                <span class="brand-copy"><span class="brand-name">灯塔 CMS</span><span class="brand-en">Lighthouse CMS</span></span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html#features">功能特性</a></li>
@@ -46,8 +47,8 @@
         <div class="container hero-grid">
             <div>
                 <div class="page-badge"><i class="fas fa-code"></i><span>开发文档</span></div>
-                <h1>SHOPAGG 开发文档</h1>
-                <p>面向二次开发者、主题作者和维护人员，说明目录结构、请求生命周期、数据模型、主题区块、安全边界和扩展流程。</p>
+                <h1>灯塔 CMS 开发文档</h1>
+                <p>面向二次开发者、插件作者、主题作者和维护人员，说明请求生命周期、数据模型、插件 API、主题区块、安全边界和扩展流程。</p>
                 <div class="hero-actions"><a href="usage.html" class="btn btn-outline btn-lg"><i class="fas fa-book-open"></i> 使用文档</a>
 <a href="https://github.com/zhpelo/shopagg-b2b-website" class="btn btn-dark btn-lg" target="_blank"><i class="fab fa-github"></i> 源码仓库</a></div>
             </div>
@@ -72,6 +73,7 @@
 <a href="#routes">添加前台页面</a>
 <a href="#添加新数据表">添加新数据表</a>
 <a href="#添加后台功能">添加后台功能</a>
+<a href="#plugins">插件系统</a>
 <a href="#themes">主题系统</a>
 <a href="#模板区块系统">模板区块系统</a>
 <a href="#主题代码规范">主题代码规范</a>
@@ -87,7 +89,7 @@
 <a href="#开发原则">开发原则</a>
         </aside>
         <article class="doc-content">
-<p>这份文档面向二次开发者、主题作者和维护人员。它说明 SHOPAGG B2B Website 的目录结构、请求生命周期、核心模块、数据库迁移、主题区块、安全边界和常见扩展方式。</p>
+<p>这份文档面向二次开发者、插件作者、主题作者和维护人员。它说明灯塔 CMS 的目录结构、请求生命周期、核心模块、数据库迁移、插件运行时、主题区块、安全边界和常见扩展方式。</p>
 <div class="doc-intro-grid">
   <div class="doc-card">
     <h3>技术定位</h3>
@@ -95,10 +97,10 @@
   </div>
   <div class="doc-card">
     <h3>扩展重点</h3>
-    <p>控制器、模型、迁移、主题模板和 blocks.php 是主要扩展面。</p>
+    <p>插件 Manifest 与 Plugin API 是首选扩展面；控制器、模型、迁移和主题模板用于核心开发。</p>
   </div>
 </div>
-<div class="callout "><strong>当前版本</strong><p>本文档按 <code>SHOPAGG B2B Website v1.2.3</code> 编写。当前源码包含 17 个迁移文件、17 张核心数据表、4 种产品价格模式和基于 Google Translate 的 249 种语言能力。</p></div>
+<div class="callout "><strong>当前版本</strong><p>本文档按 <code>灯塔 CMS v1.3.4</code> 编写。当前源码包含 22 个迁移文件、完整的 Plugin API 1.0、4 种商品价格模式和基于 Google Translate 的 249 种语言能力。</p></div>
 <section class="doc-section" id="stack">
 <h2>技术栈</h2>
 <div class="table-wrap"><table><thead><tr><th>层次</th><th>技术</th><th>说明</th></tr></thead><tbody><tr><td>后端</td><td>PHP 8.1+</td><td>纯 PHP 实现，不依赖 Composer。</td></tr><tr><td>数据库</td><td>SQLite3</td><td>文件数据库，默认位于 <code>storage/site.db</code>，支持自动迁移。</td></tr><tr><td>架构</td><td>MVC + Router</td><td>单入口、集中路由、控制器、模型、视图分层。</td></tr><tr><td>前台主题</td><td>PHP 模板 + Tailwind CDN</td><td>默认主题使用 Tailwind 类名组织前台视觉。</td></tr><tr><td>后台界面</td><td>PHP 视图 + JavaScript</td><td>后台视图位于 <code>app/views/admin/</code>，脚本集中在 <code>assets/admin/</code>。</td></tr><tr><td>富文本与交互</td><td>Jodit、SortableJS、Font Awesome</td><td>用于富文本、拖拽排序、图标和后台编辑能力。</td></tr></tbody></table></div>
@@ -119,7 +121,9 @@
 │   │   ├── Database.php
 │   │   ├── Migrator.php
 │   │   ├── AuthManager.php
-│   │   └── MediaManager.php
+│   │   ├── MediaManager.php
+│   │   └── AdminNavigation.php
+│   ├── Plugins/               # Plugin API 1.0 运行时
 │   ├── Models/
 │   │   ├── BaseModel.php
 │   │   ├── Product.php
@@ -143,11 +147,15 @@
 │   ├── blocks/
 │   ├── backups/
 │   ├── logs/
+│   ├── plugins/               # 已安装插件版本
 │   └── site.db
+├── plugin-assets/             # 对外提供的插件静态资源
+├── plugin-dev/                # 本地插件开发目录
+├── shopagg                    # 插件 CLI
 ├── uploads/
 └── Documents/</code></pre></figure>
 <h3 id="目录职责">目录职责</h3>
-<div class="table-wrap"><table><thead><tr><th>目录</th><th>职责</th><th>扩展建议</th></tr></thead><tbody><tr><td><code>app/Controllers</code></td><td>前后台请求处理。</td><td>新页面、新后台功能从这里扩展。</td></tr><tr><td><code>app/Core</code></td><td>路由、数据库、迁移、认证、媒体等基础能力。</td><td>非必要不要改核心类，优先通过模型和控制器扩展。</td></tr><tr><td><code>app/Models</code></td><td>SQLite 数据访问。</td><td>新表应配套新模型，不要在控制器里直接写大量 SQL。</td></tr><tr><td><code>app/Migrations</code></td><td>数据库结构版本化。</td><td>表结构变更必须写迁移。</td></tr><tr><td><code>app/views/admin</code></td><td>后台页面。</td><td>保持后台布局和组件风格一致。</td></tr><tr><td><code>themes/{theme}</code></td><td>前台主题模板。</td><td>主题只处理展示和可配置区块，不应改核心数据结构。</td></tr><tr><td><code>storage</code></td><td>数据库、区块配置、备份和日志。</td><td>生产环境必须禁止 Web 直接访问。</td></tr><tr><td><code>uploads</code></td><td>用户上传文件。</td><td>通过媒体库和 <code>asset_url()</code> 访问。</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>目录</th><th>职责</th><th>扩展建议</th></tr></thead><tbody><tr><td><code>app/Controllers</code></td><td>核心前后台请求处理。</td><td>修改核心页面时从这里扩展；独立业务优先写插件。</td></tr><tr><td><code>app/Core</code></td><td>路由、数据库、迁移、认证、媒体和后台导航。</td><td>非必要不要改核心类，优先使用 Plugin API。</td></tr><tr><td><code>app/Plugins</code></td><td>插件运行时、Manifest、事件、服务、任务和隔离能力。</td><td>扩展协议由这里定义，业务插件放在 <code>plugin-dev/</code> 开发。</td></tr><tr><td><code>app/Models</code></td><td>SQLite 数据访问。</td><td>核心新表应配套模型，不要在控制器里直接写大量 SQL。</td></tr><tr><td><code>app/Migrations</code></td><td>核心数据库结构版本化。</td><td>核心表结构变更必须写迁移。</td></tr><tr><td><code>app/views/admin</code></td><td>核心后台页面。</td><td>保持后台布局和组件风格一致。</td></tr><tr><td><code>themes/{theme}</code></td><td>前台主题模板。</td><td>主题只处理展示和可配置区块，不应改核心数据结构。</td></tr><tr><td><code>storage/plugins</code></td><td>已安装插件的版本化代码。</td><td>由插件管理器维护，不要手动覆盖活动版本。</td></tr><tr><td><code>plugin-assets</code></td><td>启用插件公开的 CSS、JS 等静态资源。</td><td>由插件资产发布流程维护。</td></tr><tr><td><code>storage</code></td><td>数据库、区块配置、备份和日志。</td><td>生产环境必须禁止 Web 直接访问。</td></tr><tr><td><code>uploads</code></td><td>用户上传文件。</td><td>通过媒体库和 <code>asset_url()</code> 访问。</td></tr></tbody></table></div>
 </section>
 <section class="doc-section" id="architecture">
 <h2>请求生命周期</h2>
@@ -172,7 +180,7 @@
 <h3 id="入口文件-indexphp">入口文件 <code>index.php</code></h3>
 <p>入口文件负责：</p>
 <ul><li>定义 <code>APP_ROOT</code>、<code>APP_VERSION</code>、<code>APP_BASE_PATH</code> 等常量。</li><li>设置错误处理和安全响应头。</li><li>启动 Session。</li><li>注册 <code>App\</code> 命名空间自动加载。</li><li>加载全局辅助函数。</li><li>初始化数据库连接并触发迁移。</li><li>加载路由表并分发请求。</li></ul>
-<p><code>APP_VERSION</code> 是后台更新和资源版本号的统一来源。当前源码版本为 <code>1.2.3</code>。</p>
+<p><code>APP_VERSION</code> 是后台更新和资源版本号的统一来源。当前源码版本为 <code>1.3.4</code>。</p>
 <h3 id="路由系统-router">路由系统 <code>Router</code></h3>
 <p>路由集中注册在 <code>app/routes.php</code>。前台、后台、媒体、主题、区块、菜单、轮播、更新、robots 和 sitemap 都在这里定义。</p>
 <figure class="code-block"><pre><code class="language-php">$router-&gt;add('GET', '/', [SiteController::class, 'home']);
@@ -218,9 +226,9 @@ $router-&gt;add('GET', '/admin/products', [AdminController::class, 'products']);
 </section>
 <section class="doc-section" id="data-model">
 <h2>数据库设计</h2>
-<p>当前版本围绕外贸官网业务包含 17 张核心表。表结构由 17 个迁移文件维护。</p>
+<p>当前版本由 22 个核心迁移文件维护站点、商品、内容、应用商店和插件平台的数据结构。插件还可以在自己的命名空间内维护独立迁移。</p>
 <h3 id="核心业务表">核心业务表</h3>
-<div class="table-wrap"><table><thead><tr><th>表</th><th>用途</th><th>关键字段</th></tr></thead><tbody><tr><td><code>settings</code></td><td>全站设置</td><td><code>key</code>、<code>value</code>，包含 <code>site_currency</code>。</td></tr><tr><td><code>users</code></td><td>后台账号</td><td><code>role</code>、<code>permissions</code>、<code>password_hash</code>。</td></tr><tr><td><code>categories</code></td><td>分类</td><td><code>type</code>、<code>slug</code>、<code>parent_id</code>。</td></tr><tr><td><code>products</code></td><td>产品</td><td><code>slug</code>、<code>images_json</code>、<code>price_mode</code>、<code>price_range_min</code>、<code>price_range_max</code>。</td></tr><tr><td><code>product_prices</code></td><td>阶梯价格</td><td><code>min_qty</code>、<code>max_qty</code>、<code>price</code>。</td></tr><tr><td><code>product_skus</code></td><td>多规格 SKU</td><td><code>sku_name</code>、<code>min_qty</code>、<code>price</code>、<code>sort_order</code>。</td></tr><tr><td><code>posts</code></td><td>文章、案例、页面</td><td><code>post_type</code>、<code>slug</code>、<code>content</code>、<code>seo_*</code>。</td></tr><tr><td><code>messages</code></td><td>联系留言</td><td>联系人、邮箱、电话、留言内容。</td></tr><tr><td><code>inquiries</code></td><td>产品询盘</td><td>产品、数量、客户信息、状态。</td></tr><tr><td><code>media</code></td><td>媒体库</td><td>文件路径、类型、大小、文件夹。</td></tr><tr><td><code>menus</code> / <code>menu_items</code></td><td>导航菜单</td><td>Slug、层级、排序、链接。</td></tr><tr><td><code>sliders</code> / <code>slider_items</code></td><td>轮播图</td><td>Slug、图片、标题、按钮链接。</td></tr><tr><td><code>theme_installs</code></td><td>主题安装</td><td>主题包、版本、安装记录。</td></tr><tr><td><code>update_logs</code></td><td>更新日志</td><td>版本、状态、日志、备份信息。</td></tr><tr><td><code>migrations</code></td><td>迁移记录</td><td>已执行迁移版本。</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>表</th><th>用途</th><th>关键字段</th></tr></thead><tbody><tr><td><code>settings</code></td><td>全站设置</td><td><code>key</code>、<code>value</code>，包含 <code>site_currency</code>。</td></tr><tr><td><code>users</code></td><td>后台账号</td><td><code>role</code>、<code>permissions</code>、<code>password_hash</code>。</td></tr><tr><td><code>product_categories</code></td><td>商品分类</td><td><code>slug</code>、<code>parent_id</code>。</td></tr><tr><td><code>products</code></td><td>商品</td><td><code>slug</code>、<code>images_json</code>、<code>price_mode</code>、<code>deleted_at</code>。</td></tr><tr><td><code>product_prices</code></td><td>阶梯价格</td><td><code>min_qty</code>、<code>max_qty</code>、<code>price</code>。</td></tr><tr><td><code>product_skus</code></td><td>多规格 SKU</td><td><code>sku_name</code>、<code>min_qty</code>、<code>price</code>、<code>deleted_at</code>。</td></tr><tr><td><code>posts</code></td><td>文章、案例、页面</td><td><code>post_type</code>、<code>slug</code>、<code>content</code>、<code>seo_*</code>。</td></tr><tr><td><code>messages</code></td><td>联系留言</td><td>联系人、邮箱、电话、留言内容。</td></tr><tr><td><code>inquiries</code></td><td>商品询盘</td><td>商品、数量、客户信息、状态。</td></tr><tr><td><code>media_files</code></td><td>媒体库</td><td>文件路径、类型、大小、文件夹。</td></tr><tr><td><code>menus</code> / <code>menu_items</code></td><td>导航菜单</td><td>Slug、层级、排序、链接。</td></tr><tr><td><code>sliders</code> / <code>slider_items</code></td><td>轮播图</td><td>Slug、图片、标题、按钮链接。</td></tr><tr><td><code>app_store_theme_installs</code></td><td>主题安装</td><td>远程资源、版本、安装记录。</td></tr><tr><td><code>plugins</code> / <code>plugin_*</code></td><td>插件平台</td><td>版本、设置、迁移、任务、运行记录和日志。</td></tr><tr><td><code>update_logs</code></td><td>更新日志</td><td>版本、状态、日志、备份信息。</td></tr><tr><td><code>migrations</code></td><td>迁移记录</td><td>已执行迁移版本。</td></tr></tbody></table></div>
 <h3 id="产品价格模式">产品价格模式</h3>
 <p><code>products.price_mode</code> 控制详情页显示方式：</p>
 <div class="table-wrap"><table><thead><tr><th>值</th><th>前台含义</th><th>关联数据</th></tr></thead><tbody><tr><td><code>tier</code></td><td>阶梯价格</td><td><code>product_prices</code></td></tr><tr><td><code>sku</code></td><td>多规格 SKU 价格</td><td><code>product_skus</code></td></tr><tr><td><code>range</code></td><td>价格区间</td><td><code>products.price_range_min</code>、<code>products.price_range_max</code></td></tr><tr><td><code>negotiable</code></td><td>面谈价格</td><td>不展示固定价格，引导询盘</td></tr></tbody></table></div>
@@ -275,6 +283,32 @@ function normalize_product_price_mode(string $mode, string $fallback = 'tier'): 
 <p>后台扩展要求：</p>
 <ul><li>POST 请求必须带 CSRF。</li><li>员工可访问模块必须经过权限判断。</li><li>表单错误要有明确提示。</li><li>批量删除、更新、上传等操作要做输入校验。</li><li>不要在视图里写复杂 SQL。</li></ul>
 </section>
+<section class="doc-section" id="plugins">
+<h2>插件系统</h2>
+<p>灯塔 CMS v1.3 提供进程内模块化插件运行时，兼容普通 PHP 共享主机。插件由 <code>plugin.json</code> Manifest 描述，启用或停用时编译为 PHP 缓存，正常请求无需扫描插件目录。</p>
+<h3 id="插件能力">扩展能力</h3>
+<div class="table-wrap"><table><thead><tr><th>能力</th><th>用途</th></tr></thead><tbody><tr><td><code>routes</code></td><td>注册前台、后台、API 或 Webhook 路由，支持 standalone、theme 和 admin 布局。</td></tr><tr><td><code>events</code> / <code>filters</code></td><td>监听表单、询盘等事件，或修改商品列表、详情和表单数据。</td></tr><tr><td><code>slots</code></td><td>向页面 head、body、内容前后和 footer 注入可控输出。</td></tr><tr><td><code>services</code></td><td>通过服务注册表提供或消费订单、支付、会员、通知、积分、购物车等业务能力。</td></tr><tr><td><code>jobs</code></td><td>执行定时任务、重试任务和可分片的长任务。</td></tr><tr><td><code>admin_menu</code> / <code>permissions</code></td><td>把插件页面加入后台业务分组，并为 Staff 动态增加权限。</td></tr><tr><td><code>assets</code></td><td>按路由或视图加载插件自己的 CSS、JavaScript 和 ES Module。</td></tr><tr><td><code>settings</code></td><td>生成插件设置表单并隔离保存配置。</td></tr></tbody></table></div>
+<h3 id="插件目录结构">插件目录结构</h3>
+<figure class="code-block"><pre><code class="language-text">plugin-dev/lighthouse-commerce/
+├── plugin.json
+├── src/
+│   └── Plugin.php
+├── assets/
+├── views/
+└── migrations/</code></pre></figure>
+<p>Manifest 至少声明 Schema 版本、插件 ID、名称、供应商、语义化版本、环境要求和 PSR-4 自动加载。插件 ID 仅使用小写字母、数字和中间连字符。</p>
+<h3 id="插件-cli">插件 CLI</h3>
+<figure class="code-block"><pre><code class="language-bash">php shopagg plugin:make lighthouse-commerce
+php shopagg plugin:validate plugin-dev/lighthouse-commerce
+php shopagg plugin:test plugin-dev/lighthouse-commerce
+php shopagg plugin:pack plugin-dev/lighthouse-commerce
+php shopagg plugin:install lighthouse-commerce.zip
+php shopagg plugin:enable lighthouse-commerce
+php shopagg plugin:jobs 20</code></pre></figure>
+<h3 id="插件安全边界">安全边界</h3>
+<ul><li>所有管理路由继续执行管理员认证和 CSRF 校验；插件权限使用动态 Staff 权限。</li><li>插件数据表使用插件命名空间，并通过插件迁移管理版本。</li><li>插件设置、Session、日志、静态资源和 HTTP 调用由运行时提供隔离封装。</li><li>卸载默认保留数据；版本切换不会反向删除数据库迁移。</li><li>路由、文件路径、依赖、冲突和环境要求会在安装或启用前校验。</li></ul>
+<div class="callout "><strong>服务契约</strong><p>核心当前提供 14 类插件契约，包括购物车、订单、支付、退款、会员、积分、通知、表单类型、数据采集、导入导出和文件转换。插件之间应通过服务注册表协作，避免直接依赖对方内部类。</p></div>
+</section>
 <section class="doc-section" id="themes">
 <h2>主题系统</h2>
 <p>主题目录位于 <code>themes/{theme}</code>。主题只负责前台展示和可配置内容，不应修改核心控制器、模型或数据库结构。</p>
@@ -300,7 +334,7 @@ Theme Name: Default
 Theme URI: https://www.shopagg.com
 Author: SHOPAGG
 Version: 1.0.0
-Description: Default SHOPAGG B2B theme.
+Description: Default Lighthouse CMS B2B theme.
 */</code></pre></figure>
 <h3 id="主题渲染机制">主题渲染机制</h3>
 <p><code>Controller::render()</code> 会根据系统设置中的当前主题加载模板。如果目标主题不存在，系统回退到 <code>themes/default/</code>。</p>
@@ -482,7 +516,7 @@ rg &quot;echo \\$|&lt;\\?= \\$&quot; themes app/views</code></pre></figure>
 </section>
 <section class="doc-section" id="开发原则">
 <h2>开发原则</h2>
-<ol><li>保持零构建、易部署的运行体验。</li><li>新功能优先遵循现有 MVC 和模型模式。</li><li>表结构变更必须走迁移。</li><li>主题只做展示和配置，不侵入核心业务。</li><li>后台权限必须在控制器层检查。</li><li>所有用户输入都需要校验，所有输出都需要转义。</li><li>产品、媒体、轮播、菜单尽量读取真实系统数据，不用假字段替代。</li><li>修改共享能力时补充最小可验证路径，例如前台页面、后台保存、迁移执行和移动端检查。</li></ol>
+<ol><li>保持零构建、易部署的运行体验。</li><li>独立业务功能优先通过 Plugin API 扩展，核心功能遵循现有 MVC 和模型模式。</li><li>表结构变更必须走核心迁移或插件自己的命名空间迁移。</li><li>主题只做展示和配置，不侵入核心业务。</li><li>后台权限必须在控制器或插件路由层检查。</li><li>所有用户输入都需要校验，所有输出都需要转义。</li><li>商品、媒体、轮播、菜单尽量读取真实系统数据，不用假字段替代。</li><li>修改共享能力时补充最小可验证路径，例如前台页面、后台保存、迁移执行、插件启停和移动端检查。</li></ol>
 </section>
         </article>
     </main>
@@ -492,8 +526,8 @@ rg &quot;echo \\$|&lt;\\?= \\$&quot; themes app/views</code></pre></figure>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="index.html" class="logo logo-white"><img src="assets/images/logo-light.webp" alt="SHOPAGG Logo" class="logo-image"></a>
-                    <p>专为外贸企业打造的开源建站系统。PHP + SQLite、MVC、零构建部署，覆盖产品展示、价格模式、内容运营、询盘处理和主题扩展。</p>
+                    <a href="index.html" class="logo logo-white"><span class="brand-symbol" aria-hidden="true"><i class="fas fa-tower-broadcast"></i></span><span class="brand-copy"><span class="brand-name">灯塔 CMS</span><span class="brand-en">Lighthouse CMS</span></span></a>
+                    <p>面向中国工厂与外贸公司的开源 B2B 官网系统。PHP + SQLite，轻量部署，按需扩展。</p>
                     <div class="footer-social">
                         <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank"><i class="fab fa-github"></i></a>
                         <a href="https://x.com/zhpelo/zhpelo" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -505,6 +539,7 @@ rg &quot;echo \\$|&lt;\\?= \\$&quot; themes app/views</code></pre></figure>
                     <h4>产品</h4>
                     <ul>
                         <li><a href="index.html#features">功能特性</a></li>
+                        <li><a href="index.html#plugins">插件平台</a></li>
                         <li><a href="index.html#demo">在线演示</a></li>
                         <li><a href="usage.html">使用文档</a></li>
                         <li><a href="developer.html">开发文档</a></li>
@@ -515,7 +550,7 @@ rg &quot;echo \\$|&lt;\\?= \\$&quot; themes app/views</code></pre></figure>
                     <ul>
                         <li><a href="usage.html#install">安装部署</a></li>
                         <li><a href="usage.html#admin">后台使用</a></li>
-                        <li><a href="developer.html#themes">主题开发</a></li>
+                        <li><a href="developer.html#plugins">插件开发</a></li>
                         <li><a href="developer.html#checklist">验收清单</a></li>
                     </ul>
                 </div>
@@ -546,6 +581,10 @@ rg &quot;echo \\$|&lt;\\?= \\$&quot; themes app/views</code></pre></figure>
         function toggleMobileMenu() {
             document.getElementById('mobilePanel').classList.toggle('open');
         }
+
+        document.querySelectorAll('#mobilePanel a').forEach(link => {
+            link.addEventListener('click', () => document.getElementById('mobilePanel').classList.remove('open'));
+        });
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
