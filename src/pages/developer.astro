@@ -1,0 +1,56 @@
+---
+import DocLayout from '../layouts/DocLayout.astro';
+import { Content, frontmatter } from '../content/docs/developer.md';
+
+const toc = [
+  { id: 'stack', label: '技术栈' },
+  { id: '目录结构', label: '目录结构' },
+  { id: 'architecture', label: '请求生命周期' },
+  { id: '核心模块', label: '核心模块' },
+  { id: 'data-model', label: '数据库设计' },
+  { id: 'routes', label: '添加前台页面' },
+  { id: '添加新数据表', label: '添加新数据表' },
+  { id: '添加后台功能', label: '添加后台功能' },
+  { id: 'plugins', label: '插件系统' },
+  { id: 'themes', label: '主题系统' },
+  { id: '模板区块系统', label: '模板区块系统' },
+  { id: '主题代码规范', label: '主题代码规范' },
+  { id: '菜单与轮播模型', label: '菜单与轮播模型' },
+  { id: '认证与权限', label: '认证与权限' },
+  { id: 'security', label: '安全规范' },
+  { id: '程序更新与备份', label: '程序更新与备份' },
+  { id: '部署说明', label: '部署说明' },
+  { id: '扩展示例faq-模块', label: '扩展示例：FAQ 模块' },
+  { id: 'checklist', label: '主题开发验收清单' },
+  { id: '后台功能验收清单', label: '后台功能验收清单' },
+  { id: '常用排查命令', label: '常用排查命令' },
+  { id: '开发原则', label: '开发原则' }
+];
+---
+
+<DocLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  heading="灯塔 CMS 开发文档"
+  eyebrow="开发文档"
+  eyebrowIcon="fas fa-code"
+  intro="面向二次开发者、插件作者、主题作者和维护人员，说明请求生命周期、数据模型、插件 API、主题区块、安全边界和扩展流程。"
+  active="developer"
+  version={frontmatter.version}
+  modifiedTime={frontmatter.modifiedTime}
+  actions={[
+    { href: '/usage', label: '使用文档', icon: 'fas fa-book-open' },
+    { href: 'https://github.com/zhpelo/shopagg-b2b-website', label: '源码仓库', icon: 'fab fa-github', style: 'btn-dark', external: true }
+  ]}
+  quickTitle="开发关注点"
+  quickIcon="fas fa-route"
+  quickItems={[
+    '保持 PHP + SQLite 的零构建部署体验',
+    '通过控制器、模型和迁移扩展功能',
+    '主题只负责展示和可配置区块',
+    '后台权限、CSRF、上传和输出转义必须逐层检查'
+  ]}
+  {toc}
+>
+  <Content />
+</DocLayout>

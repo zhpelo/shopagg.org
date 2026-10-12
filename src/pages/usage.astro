@@ -1,0 +1,48 @@
+---
+import DocLayout from '../layouts/DocLayout.astro';
+import { Content, frontmatter } from '../content/docs/usage.md';
+
+const toc = [
+  { id: '角色与阅读路线', label: '角色与阅读路线' },
+  { id: 'install', label: '安装部署' },
+  { id: 'first-login', label: '首次登录与初始化' },
+  { id: 'admin', label: '后台导航说明' },
+  { id: 'content', label: '产品中心' },
+  { id: 'content-management', label: '内容管理' },
+  { id: 'inbox', label: '收件箱与询盘' },
+  { id: 'appearance', label: '外观区块' },
+  { id: 'apps', label: '应用商店与插件' },
+  { id: 'settings', label: '系统设置' },
+  { id: 'permissions', label: '员工与权限' },
+  { id: '日常操作流程', label: '日常操作流程' },
+  { id: 'launch', label: '上线前检查清单' },
+  { id: '常见问题', label: '常见问题' }
+];
+---
+
+<DocLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  heading="灯塔 CMS 使用文档"
+  eyebrow="使用文档"
+  eyebrowIcon="fas fa-book-open"
+  intro="面向管理员、运营人员、商品维护人员和销售跟单人员，覆盖部署、后台配置、内容维护、询盘处理、应用扩展和上线检查。"
+  active="usage"
+  version={frontmatter.version}
+  modifiedTime={frontmatter.modifiedTime}
+  actions={[
+    { href: 'https://www.shopagg.com/dashboard/b2b-sites/create', label: '云端部署', icon: 'fas fa-cloud-arrow-up', style: 'btn-primary', external: true },
+    { href: '/developer', label: '开发文档', icon: 'fas fa-code' }
+  ]}
+  quickTitle="推荐阅读路线"
+  quickIcon="fas fa-route"
+  quickItems={[
+    '先完成安装部署和首次登录',
+    '再配置公司资料、货币、翻译和安全项',
+    '按产品、内容、外观、询盘顺序完成运营配置',
+    '上线前逐项检查密码、表单、菜单、SEO 和备份'
+  ]}
+  {toc}
+>
+  <Content />
+</DocLayout>

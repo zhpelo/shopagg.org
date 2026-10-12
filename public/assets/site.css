@@ -59,6 +59,17 @@ body {
     color: var(--gray);
 }
 
+.doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    color: var(--gray);
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border);
+}
+
 /* ==================== Navigation ==================== */
 .navbar {
     position: fixed;

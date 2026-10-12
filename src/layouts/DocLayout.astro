@@ -1,0 +1,101 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface LinkAction {
+  href: string;
+  label: string;
+  icon: string;
+  style?: string;
+  external?: boolean;
+}
+
+interface TocItem {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  eyebrow: string;
+  eyebrowIcon: string;
+  intro: string;
+  active: 'usage' | 'developer';
+  actions: LinkAction[];
+  quickTitle: string;
+  quickIcon: string;
+  quickItems: string[];
+  toc: TocItem[];
+  version: string;
+  modifiedTime: string;
+}
+
+const props = Astro.props;
+const canonicalPath = props.active === 'usage' ? '/usage' : '/developer';
+const canonical = new URL(canonicalPath, Astro.site).href;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: props.heading,
+  description: props.description,
+  inLanguage: 'zh-CN',
+  version: props.version,
+  dateModified: props.modifiedTime,
+  mainEntityOfPage: canonical,
+  author: {
+    '@type': 'Organization',
+    name: '灯塔 CMS',
+    url: 'https://shopagg.org/'
+  },
+  isPartOf: {
+    '@type': 'WebSite',
+    name: '灯塔 CMS',
+    alternateName: 'Lighthouse CMS',
+    url: 'https://shopagg.org/'
+  }
+};
+---
+
+<BaseLayout title={props.title} description={props.description} type="article" modifiedTime={props.modifiedTime} structuredData={structuredData} {canonicalPath}>
+  <Header active={props.active} />
+
+  <header class="doc-hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="page-badge"><i class={props.eyebrowIcon}></i><span>{props.eyebrow}</span></div>
+        <h1>{props.heading}</h1>
+        <p>{props.intro}</p>
+        <div class="hero-actions">
+          {props.actions.map((action) => (
+            <a href={action.href} class={`btn ${action.style ?? 'btn-outline'} btn-lg`} target={action.external ? '_blank' : undefined} rel={action.external ? 'noopener' : undefined}>
+              <i class={action.icon}></i> {action.label}
+            </a>
+          ))}
+        </div>
+      </div>
+      <aside class="hero-panel">
+        <div class="panel-title"><i class={props.quickIcon}></i>{props.quickTitle}</div>
+        <ul class="quick-list">
+          {props.quickItems.map((item) => <li><i class="fas fa-check-circle"></i><span>{item}</span></li>)}
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <main class="container doc-shell">
+    <aside class="toc" aria-label="文档目录">
+      <h2>文档目录</h2>
+      {props.toc.map((item) => <a href={`#${item.id}`}>{item.label}</a>)}
+    </aside>
+    <article class="doc-content">
+      <div class="doc-meta"><span>适用版本：{props.version}</span><span>更新日期：{props.modifiedTime.slice(0, 10)}</span></div>
+      <slot />
+    </article>
+  </main>
+
+  <Footer />
+  <script is:inline src="/scripts/site.js"></script>
+</BaseLayout>

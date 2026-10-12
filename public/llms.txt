@@ -1,0 +1,21 @@
+# 灯塔 CMS（Lighthouse CMS）
+
+> 灯塔 CMS 是面向中国工厂与外贸公司的开源 B2B 官网系统，基于 PHP 8.1+ 与 SQLite，内置产品、询盘、内容、主题、应用商店和插件平台。
+
+## Documentation
+
+- [项目介绍](https://shopagg.org/)
+- [使用文档](https://shopagg.org/usage)
+- [开发文档](https://shopagg.org/developer)
+- [项目信息 JSON](https://shopagg.org/api/project.json)
+- [最新版本 JSON](https://shopagg.org/api/releases/latest.json)
+- [兼容性 JSON](https://shopagg.org/api/compatibility.json)
+- [GitHub](https://github.com/zhpelo/shopagg-b2b-website)
+
+## Project facts
+
+- 中文名：灯塔 CMS
+- 英文名：Lighthouse CMS
+- 开源许可证：MIT
+- 运行环境：PHP 8.1+、SQLite3
+- 主要用途：外贸企业官网、B2B 产品展示、询盘收集、内容管理和插件扩展

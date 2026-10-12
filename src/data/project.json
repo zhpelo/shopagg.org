@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "lighthouse-cms",
+  "name": "灯塔 CMS",
+  "alternate_name": "Lighthouse CMS",
+  "description": "面向中国工厂与外贸公司的开源 B2B 官网系统。",
+  "license": "MIT",
+  "homepage": "https://shopagg.org/",
+  "repository": "https://github.com/zhpelo/shopagg-b2b-website",
+  "documentation": {
+    "usage": "https://shopagg.org/usage",
+    "developer": "https://shopagg.org/developer"
+  },
+  "requirements": {
+    "php": ">=8.1",
+    "database": "SQLite3",
+    "extensions": ["sqlite3", "mbstring", "fileinfo"]
+  }
+}

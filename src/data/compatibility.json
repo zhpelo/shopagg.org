@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "product": "lighthouse-cms",
+  "channels": [
+    "stable"
+  ],
+  "current": {
+    "version": "1.3.4",
+    "php": ">=8.1",
+    "database": "SQLite3",
+    "plugin_api": "1.0"
+  }
+}
