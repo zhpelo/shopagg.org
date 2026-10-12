@@ -14,7 +14,7 @@ const {
   title,
   description,
   type = 'website',
-  image = '/assets/images/logo.webp',
+  image = '/assets/images/lighthouse-logo-source.png',
   publishedTime,
   modifiedTime,
   structuredData,
@@ -50,7 +50,7 @@ const socialImage = new URL(image, Astro.site);
     <meta name="twitter:image" content={socialImage} />
 
     <title>{title}</title>
-    <link rel="icon" href="/assets/images/lighthouse-mark.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/images/lighthouse-favicon.png" type="image/png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="/assets/site.css" />
     {structuredData && (
