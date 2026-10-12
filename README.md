@@ -34,9 +34,19 @@ npm run build
 版本接口在构建时生成，不依赖运行时 Worker：
 
 - `/api/project.json`
+- `/api/capabilities.json`
 - `/api/compatibility.json`
+- `/api/docs/index.json`
+- `/api/openapi.json`
 - `/api/releases/latest.json`
 - `/api/releases/index.json`
+
+搜索和 AI 入口：
+
+- `/sitemap-index.xml`
+- `/robots.txt`
+- `/llms.txt`
+- `/llms-full.txt`
 
 ## 发布流程
 

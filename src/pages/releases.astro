@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import releases from '../data/releases.json';
+
+const latest = releases[0];
+const title = '版本发布 - 灯塔 CMS（Lighthouse CMS）';
+const description = '查看灯塔 CMS 当前稳定版、历史发布记录、源码包和机器可读的版本更新数据。';
+const formatDate = (value: string) => new Intl.DateTimeFormat('zh-CN', { timeZone: 'Asia/Shanghai', year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(value));
+---
+
+<BaseLayout {title} {description} canonicalPath="/releases">
+  <Header active="releases" />
+  <main class="project-page">
+    <header class="project-hero compact">
+      <div class="container project-hero-grid">
+        <div>
+          <div class="project-eyebrow"><span class="status-dot"></span> Stable release</div>
+          <h1>灯塔 CMS v{latest.version}</h1>
+          <p>稳定版本来自 GitHub Releases，并在官网构建时同步为静态 JSON。CMS 更新程序、官网和第三方工具可以读取同一份版本数据。</p>
+          <div class="hero-buttons">
+            <a href={latest.release_url} target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-github"></i> 查看 Release</a>
+            <a href={latest.package.url} class="btn btn-outline"><i class="fas fa-download"></i> 下载源码包</a>
+          </div>
+        </div>
+        <div class="release-current-card">
+          <span>Current stable</span><strong>v{latest.version}</strong>
+          <dl><div><dt>发布时间</dt><dd>{formatDate(latest.published_at)}</dd></div><div><dt>通道</dt><dd>stable</dd></div><div><dt>数据格式</dt><dd>JSON Schema 1</dd></div></dl>
+          <a href="/api/releases/latest.json">读取 latest.json <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </header>
+
+    <section class="container release-history">
+      <div class="project-section-heading"><div><span>Release history</span><h2>稳定版本记录</h2></div><a href="/api/releases/index.json">完整 JSON <i class="fas fa-code"></i></a></div>
+      <div class="release-list">
+        {releases.map((release, index) => (
+          <article class="release-row">
+            <div class="release-node"></div>
+            <div class="release-version"><strong>v{release.version}</strong>{index === 0 && <span>Latest</span>}</div>
+            <time datetime={release.published_at}>{formatDate(release.published_at)}</time>
+            <div class="release-actions"><a href={release.release_url} target="_blank" rel="noopener">说明</a><a href={release.package.url}>源码</a></div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <script is:inline src="/scripts/site.js"></script>
+</BaseLayout>

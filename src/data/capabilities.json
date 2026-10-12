@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "product": "lighthouse-cms",
+  "updated_at": "2026-10-12",
+  "groups": [
+    {
+      "id": "catalog",
+      "name": "产品与商品",
+      "summary": "面向 B2B 展示与询价场景的商品资料中心。",
+      "icon": "boxes-stacked",
+      "items": [
+        { "id": "products", "name": "产品管理", "summary": "产品、分类、图集、详情和发布状态统一维护。", "status": "stable" },
+        { "id": "product-pricing", "name": "多模式价格", "summary": "支持固定价、价格区间、阶梯价和面议价格。", "status": "stable" },
+        { "id": "product-skus", "name": "多规格 SKU", "summary": "为不同规格维护起订量、价格和独立状态。", "status": "stable" },
+        { "id": "soft-delete", "name": "商品回收站", "summary": "通过软删除降低误操作造成的数据损失。", "status": "stable" }
+      ]
+    },
+    {
+      "id": "content",
+      "name": "内容与媒体",
+      "summary": "让官网内容和品牌素材保持可维护。",
+      "icon": "file-lines",
+      "items": [
+        { "id": "posts", "name": "文章与案例", "summary": "统一管理博客文章、客户案例和发布状态。", "status": "stable" },
+        { "id": "pages", "name": "自定义页面", "summary": "通过独立 Slug 创建企业介绍、服务等页面。", "status": "stable" },
+        { "id": "media-library", "name": "媒体库", "summary": "集中管理图片、文件、文件夹和素材引用。", "status": "stable" },
+        { "id": "rich-editor", "name": "富文本编辑", "summary": "后台提供适合运营人员的内容编辑体验。", "status": "stable" }
+      ]
+    },
+    {
+      "id": "lead-generation",
+      "name": "询盘与销售线索",
+      "summary": "从页面访问到销售跟进的轻量转化链路。",
+      "icon": "inbox",
+      "items": [
+        { "id": "contact-messages", "name": "联系留言", "summary": "集中接收并处理官网联系表单。", "status": "stable" },
+        { "id": "product-inquiries", "name": "产品询盘", "summary": "关联产品、数量和客户资料生成询价记录。", "status": "stable" },
+        { "id": "inquiry-status", "name": "跟进状态", "summary": "按状态整理待处理、跟进中和已完成询盘。", "status": "stable" },
+        { "id": "currency", "name": "全局货币", "summary": "价格展示和询盘信息共用统一货币配置。", "status": "stable" }
+      ]
+    },
+    {
+      "id": "appearance",
+      "name": "主题与页面外观",
+      "summary": "在不修改核心程序的情况下更新品牌展示。",
+      "icon": "palette",
+      "items": [
+        { "id": "themes", "name": "主题系统", "summary": "前后台分离，支持 ZIP 校验安装和主题切换。", "status": "stable" },
+        { "id": "blocks", "name": "可配置区块", "summary": "后台维护首页文案、图片、按钮和产品选择。", "status": "stable" },
+        { "id": "menus", "name": "菜单管理", "summary": "维护主导航、页脚和产品导航的层级结构。", "status": "stable" },
+        { "id": "sliders", "name": "轮播图", "summary": "按 Slug 管理轮播图片、标题、描述和链接。", "status": "stable" }
+      ]
+    },
+    {
+      "id": "extensions",
+      "name": "插件与扩展",
+      "summary": "把企业官网扩展为可演进的业务平台。",
+      "icon": "plug",
+      "items": [
+        { "id": "plugin-runtime", "name": "Plugin API 1.0", "summary": "Manifest 驱动的插件发现、启停、校验和缓存。", "status": "stable" },
+        { "id": "routes-events", "name": "路由与事件", "summary": "插件可注册前后台路由、API、Webhook、事件和过滤器。", "status": "stable" },
+        { "id": "services", "name": "业务服务契约", "summary": "为订单、支付、会员、通知和积分提供标准接口。", "status": "stable" },
+        { "id": "jobs", "name": "任务系统", "summary": "支持定时、重试、分片任务和运行日志。", "status": "stable" }
+      ]
+    },
+    {
+      "id": "operations",
+      "name": "运维与更新",
+      "summary": "为长期运行、升级和故障恢复提供基础能力。",
+      "icon": "arrows-rotate",
+      "items": [
+        { "id": "updates", "name": "程序更新", "summary": "检查 GitHub Release、下载更新并记录执行结果。", "status": "stable" },
+        { "id": "backups", "name": "更新前备份", "summary": "覆盖文件前创建备份，降低升级风险。", "status": "stable" },
+        { "id": "migrations", "name": "数据库迁移", "summary": "时间戳迁移文件随版本演进自动执行。", "status": "stable" },
+        { "id": "diagnostics", "name": "状态与日志", "summary": "查看插件任务、程序更新和迁移执行状态。", "status": "stable" }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "权限与安全",
+      "summary": "覆盖后台账号、请求、上传和输出的安全边界。",
+      "icon": "shield-halved",
+      "items": [
+        { "id": "roles", "name": "员工角色", "summary": "管理员和员工账号按职责分配最小权限。", "status": "stable" },
+        { "id": "csrf", "name": "CSRF 防护", "summary": "后台写操作和关键表单执行令牌校验。", "status": "stable" },
+        { "id": "upload-validation", "name": "上传校验", "summary": "对文件类型、大小、路径和压缩包内容设置边界。", "status": "stable" },
+        { "id": "security-headers", "name": "安全响应头", "summary": "提供基础浏览器安全策略和敏感目录保护建议。", "status": "stable" }
+      ]
+    },
+    {
+      "id": "discovery",
+      "name": "SEO 与国际化",
+      "summary": "帮助企业内容面向搜索引擎和国际访客。",
+      "icon": "globe",
+      "items": [
+        { "id": "seo-fields", "name": "页面 SEO", "summary": "为产品和内容维护标题、描述等搜索字段。", "status": "stable" },
+        { "id": "sitemap", "name": "Sitemap 与 Robots", "summary": "自动输出搜索引擎可读取的站点发现入口。", "status": "stable" },
+        { "id": "open-graph", "name": "Open Graph", "summary": "控制页面在社交平台分享时的标题和摘要。", "status": "stable" },
+        { "id": "translation", "name": "在线翻译", "summary": "集成 Google Translate，覆盖 249 种语言入口。", "status": "stable" }
+      ]
+    }
+  ]
+}

@@ -3,379 +3,185 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import releases from '../data/releases.json';
+import capabilities from '../data/capabilities.json';
 
-const version = releases[0].version;
+const latest = releases[0];
+const version = latest.version;
 const title = '灯塔 CMS（Lighthouse CMS）- 开源 B2B 官网系统';
-const description = '灯塔 CMS（Lighthouse CMS）是面向中国工厂与外贸公司的开源 B2B 官网系统。基于 PHP 8.1+ 与 SQLite，内置产品、询盘、内容、主题、应用商店和插件平台。';
+const description = '灯塔 CMS 是面向中国工厂与外贸公司的开源 B2B 官网系统。基于 PHP 8.1+ 与 SQLite，自托管、可扩展，提供产品、询盘、内容、主题和插件平台。';
+const featureNames = capabilities.groups.flatMap((group) => group.items.map((item) => item.name));
+const iconClass = (icon: string) => `fas fa-${icon}`;
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
     { '@type': 'WebSite', '@id': 'https://shopagg.org/#website', url: 'https://shopagg.org/', name: '灯塔 CMS', alternateName: 'Lighthouse CMS', inLanguage: 'zh-CN' },
     { '@type': 'Organization', '@id': 'https://shopagg.org/#organization', name: '灯塔 CMS', alternateName: 'Lighthouse CMS', url: 'https://shopagg.org/', logo: 'https://shopagg.org/assets/images/logo.webp', sameAs: ['https://github.com/zhpelo/shopagg-b2b-website'] },
-    { '@type': 'SoftwareApplication', '@id': 'https://shopagg.org/#software', name: '灯塔 CMS', alternateName: 'Lighthouse CMS', applicationCategory: 'BusinessApplication', operatingSystem: 'Linux, Windows, macOS', softwareRequirements: 'PHP 8.1+、SQLite3', softwareVersion: version, license: 'https://github.com/zhpelo/shopagg-b2b-website/blob/main/LICENSE', url: 'https://shopagg.org/', downloadUrl: releases[0].package.url, codeRepository: 'https://github.com/zhpelo/shopagg-b2b-website', description }
+    { '@type': 'SoftwareApplication', '@id': 'https://shopagg.org/#software', name: '灯塔 CMS', alternateName: 'Lighthouse CMS', applicationCategory: 'BusinessApplication', operatingSystem: 'Linux, Windows, macOS', softwareRequirements: 'PHP 8.1+、SQLite3', softwareVersion: version, license: 'https://github.com/zhpelo/shopagg-b2b-website/blob/main/LICENSE', url: 'https://shopagg.org/', downloadUrl: latest.package.url, codeRepository: 'https://github.com/zhpelo/shopagg-b2b-website', featureList: featureNames, description }
   ]
 };
 ---
 
 <BaseLayout {title} {description} structuredData={structuredData} canonicalPath="/">
   <Header active="home" />
-<!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-tower-broadcast"></i>
-                    <span>灯塔 CMS · v{version}</span>
-                </div>
-                <h1>让每个外贸团队，都拥有自己的数字灯塔</h1>
-                <p>灯塔 CMS（Lighthouse CMS）是面向中国工厂与外贸公司的开源 B2B 官网系统。PHP + SQLite，上传即可运行；内置产品、内容、询盘、主题、应用商店和完整插件运行时。</p>
-                <div class="hero-buttons">
-                    <a href="#getstarted" class="btn btn-primary btn-lg">
-                        <i class="fas fa-play"></i> 快速开始
-                    </a>
-                    <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" class="btn btn-dark btn-lg">
-                        <i class="fab fa-github"></i> Star on GitHub
-                    </a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">{version}</div>
-                        <div class="stat-label">当前版本</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">22</div>
-                        <div class="stat-label">版本化迁移</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">249</div>
-                        <div class="stat-label">翻译语言</div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <img src="https://github.com/user-attachments/assets/b6400b0b-f345-4321-9c90-5925c1e6b790" alt="灯塔 CMS 后台仪表盘" class="hero-image">
-                <div class="floating-card card-1">
-                    <div class="icon green"><i class="fas fa-check"></i></div>
-                    <div>
-                        <div class="text">零构建部署</div>
-                        <div class="subtext">PHP + SQLite</div>
-                    </div>
-                </div>
-                <div class="floating-card card-2">
-                    <div class="icon blue"><i class="fas fa-globe"></i></div>
-                    <div>
-                        <div class="text">插件运行时</div>
-                        <div class="subtext">路由 · 事件 · 任务</div>
-                    </div>
-                </div>
-            </div>
+  <main class="oss-home">
+    <section class="oss-hero">
+      <div class="oss-grid-pattern"></div>
+      <div class="container oss-hero-layout">
+        <div class="oss-hero-copy">
+          <div class="oss-kicker"><span class="status-dot"></span> Open source · MIT License · v{version}</div>
+          <h1><span class="hero-title-line">为外贸业务而生</span><br /><span class="accent">开源 B2B CMS</span></h1>
+          <p>灯塔 CMS（Lighthouse CMS）把产品展示、内容运营、客户询盘和插件扩展放进一套轻量系统。PHP + SQLite，上传即可运行，数据和代码始终由你掌控。</p>
+          <div class="oss-hero-actions">
+            <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" rel="noopener" class="btn oss-btn-light"><i class="fab fa-github"></i> 查看 GitHub</a>
+            <a href="/usage#install" class="btn oss-btn-ghost"><i class="fas fa-rocket"></i> 开始部署</a>
+          </div>
+          <div class="oss-trust-row">
+            <span><i class="fas fa-check"></i> 无 Composer 依赖</span>
+            <span><i class="fas fa-check"></i> 可部署到普通主机</span>
+            <span><i class="fas fa-check"></i> 支持二次开发</span>
+          </div>
         </div>
+
+        <div class="repo-card" aria-label="灯塔 CMS 项目安装命令">
+          <div class="repo-card-head">
+            <div class="repo-dots"><span></span><span></span><span></span></div>
+            <span><i class="fab fa-github"></i> zhpelo / shopagg-b2b-website</span>
+            <span class="repo-public">Public</span>
+          </div>
+          <div class="repo-card-body">
+            <div class="repo-branch"><span><i class="fas fa-code-branch"></i> main</span><span>PHP</span></div>
+            <div class="repo-file-list">
+              <div><i class="fas fa-folder"></i><span>app</span><small>核心 MVC 与插件运行时</small></div>
+              <div><i class="fas fa-folder"></i><span>themes</span><small>可替换前台主题</small></div>
+              <div><i class="fas fa-folder"></i><span>storage</span><small>SQLite 与运行数据</small></div>
+              <div><i class="fas fa-file-code"></i><span>index.php</span><small>应用单入口</small></div>
+            </div>
+            <div class="install-command">
+              <span>$</span><code>git clone https://github.com/zhpelo/shopagg-b2b-website.git</code>
+              <button type="button" onclick="copyInstallCommand()" aria-label="复制安装命令"><i class="far fa-copy"></i></button>
+            </div>
+            <div class="repo-release"><span><i class="fas fa-tag"></i> Latest release</span><strong>v{version}</strong><a href="/releases">全部版本 <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge"><i class="fas fa-sparkles"></i> 功能特性</div>
-                <h2 class="section-title">从官网展示到后台运营</h2>
-                <p class="section-desc">从品牌展示、商品管理和询盘跟进，到应用扩展与长期维护，所有关键环节都在一个轻量系统里完成</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon purple"><i class="fas fa-boxes-stacked"></i></div>
-                    <h3>产品与内容中台</h3>
-                    <p>商品、分类、阶梯价格、多规格 SKU、价格区间、面谈价格、博客、案例和自定义页面统一管理。</p>
-                </div>
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon blue"><i class="fas fa-inbox"></i></div>
-                    <h3>外贸询盘与报价准备</h3>
-                    <p>联系留言和产品询单分组处理，价格统一读取全局货币，支持多种价格展示模式辅助销售跟进。</p>
-                </div>
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon green"><i class="fas fa-search"></i></div>
-                    <h3>SEO 与多语言</h3>
-                    <p>全站 SEO 字段、robots.txt、sitemap.xml、OG 标签和 Google Translate 在线翻译集成，支持 249 种语言。</p>
-                </div>
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon orange"><i class="fas fa-wand-magic-sparkles"></i></div>
-                    <h3>主题、区块与轮播</h3>
-                    <p>前后台主题分离，后台可改文案、图片、按钮、菜单和轮播；主题 zip 包支持校验上传。</p>
-                </div>
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon pink"><i class="fas fa-store"></i></div>
-                    <h3>应用商店与插件</h3>
-                    <p>在统一应用商店浏览主题与插件，也可上传 ZIP 包安装、启停、升级、回滚和配置自有插件。</p>
-                </div>
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon cyan"><i class="fas fa-shield-alt"></i></div>
-                    <h3>安全、权限与更新</h3>
-                    <p>CSRF、上传校验、响应头、角色权限、产品软删除、程序更新和 22 个版本化迁移，降低维护风险。</p>
-                </div>
-            </div>
-        </div>
+    <section class="project-facts" aria-label="项目技术信息">
+      <div class="container project-facts-grid">
+        <a href="/releases"><span>Current stable</span><strong>v{version}</strong></a>
+        <div><span>Runtime</span><strong>PHP 8.1+</strong></div>
+        <div><span>Database</span><strong>SQLite3</strong></div>
+        <a href="https://github.com/zhpelo/shopagg-b2b-website/blob/main/LICENSE" target="_blank" rel="noopener"><span>License</span><strong>MIT</strong></a>
+        <a href="/developer#plugins"><span>Plugin API</span><strong>1.0</strong></a>
+      </div>
     </section>
 
-    <!-- Plugin Platform Section -->
-    <section class="plugin-platform" id="plugins">
-        <div class="container plugin-layout">
-            <div class="plugin-copy">
-                <div class="section-badge"><i class="fas fa-puzzle-piece"></i> v1.3 插件平台</div>
-                <h2>从企业官网，继续扩展成业务平台</h2>
-                <p>灯塔 CMS 的插件系统运行在普通 PHP 共享主机上。Manifest 描述能力，启停时编译缓存，日常请求不扫描插件目录。</p>
-                <ul class="plugin-points">
-                    <li><i class="fas fa-check-circle"></i><span>注册前后台页面、API、Webhook、事件、过滤器和页面插槽</span></li>
-                    <li><i class="fas fa-check-circle"></i><span>提供订单、支付、会员、通知、积分、导入导出等标准业务接口</span></li>
-                    <li><i class="fas fa-check-circle"></i><span>独立数据表、迁移、设置、日志、分片任务和动态员工权限</span></li>
-                    <li><i class="fas fa-check-circle"></i><span>后台支持 ZIP 安装、应用商店下载、版本升级与安全回滚</span></li>
-                </ul>
-                <a href="/developer#plugins" class="btn btn-outline"><i class="fas fa-code"></i> 查看插件开发说明</a>
-            </div>
-            <div class="plugin-terminal" aria-label="灯塔 CMS 插件开发命令示例">
-                <div class="terminal-bar"><span class="terminal-dots"><span></span><span></span><span></span></span><span>Plugin SDK</span></div>
-                <pre><span class="comment"># 创建插件骨架</span>
-<span class="command">php shopagg plugin:make lighthouse-commerce</span>
-
-<span class="comment"># 校验 Manifest 和运行环境</span>
-<span class="command">php shopagg plugin:validate plugin-dev/lighthouse-commerce</span>
-<span class="success">✓ Plugin manifest is valid</span>
-
-<span class="comment"># 打包为可安装 ZIP</span>
-<span class="command">php shopagg plugin:pack plugin-dev/lighthouse-commerce</span></pre>
-                <div class="plugin-capabilities">
-                    <span class="plugin-capability">Plugin API 1.0</span>
-                    <span class="plugin-capability">14 类业务契约</span>
-                    <span class="plugin-capability">定时与分片任务</span>
-                </div>
-            </div>
+    <section class="oss-section" id="capabilities">
+      <div class="container">
+        <div class="oss-section-heading">
+          <div><span class="oss-section-label">Product capabilities</span><h2>一套系统，覆盖官网运营全流程</h2><p>所有能力都有稳定的数据标识和机器可读描述，方便团队选型、文档维护和自动化集成。</p></div>
+          <a href="/capabilities" class="text-link">查看完整能力清单 <i class="fas fa-arrow-right"></i></a>
         </div>
+        <div class="oss-capability-grid">
+          {capabilities.groups.map((group, index) => (
+            <a href={`/capabilities#${group.id}`} class:list={['oss-capability-card', { featured: index === 0 || index === 4 }]}>
+              <div class="oss-capability-icon"><i class={iconClass(group.icon)}></i></div>
+              <div><h3>{group.name}</h3><p>{group.summary}</p><span>{group.items.length} 项稳定能力</span></div>
+              <i class="fas fa-arrow-up-right-from-square card-arrow"></i>
+            </a>
+          ))}
+        </div>
+      </div>
     </section>
 
-    <!-- Get Started Section -->
-    <section class="getstarted" id="getstarted">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge"><i class="fas fa-terminal"></i> 快速开始</div>
-                <h2 class="section-title">5 分钟完成部署</h2>
-                <p class="section-desc">无需 Composer、Node.js 或构建工具，上传文件后首次访问自动创建数据库和默认数据</p>
-            </div>
-            <div class="install-box">
-                <div class="install-tabs">
-                    <button class="install-tab active" type="button" data-install-tab="git">Git Clone</button>
-                    <button class="install-tab" type="button" data-install-tab="zip">下载 ZIP</button>
-                    <button class="install-tab" type="button" data-install-tab="cloud">云端部署</button>
-                </div>
-                <div class="install-code">
-                    <div id="installCodeContent"></div>
-                    <button class="copy-btn" onclick="copyCode()"><i class="fas fa-copy"></i> 复制</button>
-                </div>
-            </div>
-            <div class="requirements">
-                <div class="requirement">
-                    <i class="fab fa-php"></i>
-                    <h4>PHP 8.1+</h4>
-                    <p>需要 mbstring / fileinfo</p>
-                </div>
-                <div class="requirement">
-                    <i class="fas fa-database"></i>
-                    <h4>SQLite3</h4>
-                    <p>文件数据库，自动迁移</p>
-                </div>
-                <div class="requirement">
-                    <i class="fas fa-server"></i>
-                    <h4>Apache / Nginx</h4>
-                    <p>支持根目录和子目录部署</p>
-                </div>
-            </div>
+    <section class="product-showcase" id="demo">
+      <div class="container showcase-layout">
+        <div class="showcase-copy">
+          <span class="oss-section-label">Built for daily operations</span>
+          <h2>运营团队能用，开发团队也能扩展</h2>
+          <p>后台围绕真实工作流组织：商品与内容统一维护，询盘集中处理，主题、菜单、轮播和插件都拥有明确入口。</p>
+          <ul class="oss-check-list">
+            <li><i class="fas fa-check"></i><span><strong>运营友好</strong>无需接触代码即可维护产品、文章、案例与页面。</span></li>
+            <li><i class="fas fa-check"></i><span><strong>销售可跟进</strong>联系留言和产品询盘进入统一收件箱。</span></li>
+            <li><i class="fas fa-check"></i><span><strong>权限清晰</strong>员工账号按模块分配最小权限。</span></li>
+          </ul>
+          <div class="inline-actions"><a href="https://demo.shopagg.org/admin" target="_blank" rel="noopener" class="btn btn-primary">进入在线演示</a><a href="/usage" class="text-link">阅读使用文档 <i class="fas fa-arrow-right"></i></a></div>
         </div>
+        <div class="app-window">
+          <div class="app-window-bar"><div><span></span><span></span><span></span></div><span>demo.shopagg.org/admin</span><span class="live-indicator">Live</span></div>
+          <img src="https://github.com/user-attachments/assets/86918ca6-dd59-4fde-bacf-eef4dc668460" alt="灯塔 CMS 商品管理后台" loading="lazy" />
+        </div>
+      </div>
     </section>
 
-    <!-- Demo Section -->
-    <section class="demo" id="demo">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge"><i class="fas fa-laptop-code"></i> 在线演示</div>
-                <h2 class="section-title">亲自体验系统功能</h2>
-                <p class="section-desc">探索前后台完整功能，感受流畅的操作体验</p>
-            </div>
-            <div class="demo-container">
-                <div class="demo-content">
-                    <h3>重新设计的后台工作台</h3>
-                    <p>后台按收件箱、商品、内容、外观、扩展和系统分组，支持手风琴侧栏与插件动态菜单。内容、客户消息、网站外观和应用扩展都能在同一处维护。</p>
-                    <ul class="demo-features">
-                        <li><i class="fas fa-check-circle"></i> 可视化仪表盘，数据一目了然</li>
-                        <li><i class="fas fa-check-circle"></i> 收件箱集中处理留言和产品询单</li>
-                        <li><i class="fas fa-check-circle"></i> 媒体库、菜单、轮播图和模板区块统一维护</li>
-                        <li><i class="fas fa-check-circle"></i> 多员工账号，按模块分配最小权限</li>
-                        <li><i class="fas fa-check-circle"></i> 应用商店、插件任务、程序更新和迁移状态集中检查</li>
-                    </ul>
-                    <div class="demo-credentials">
-                        <h4>演示账号</h4>
-                        <div class="credential-row">
-                            <div class="credential-item">
-                                <span>用户名:</span>
-                                <code>admin</code>
-                            </div>
-                            <div class="credential-item">
-                                <span>密码:</span>
-                                <code>admin123</code>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="demo-buttons">
-                        <a href="https://demo.shopagg.org/admin" class="btn btn-primary btn-lg" target="_blank">
-                            <i class="fas fa-cog"></i> 进入后台
-                        </a>
-                        <a href="https://demo.shopagg.org/" class="btn btn-outline btn-lg" target="_blank">
-                            <i class="fas fa-globe"></i> 访问前台
-                        </a>
-                    </div>
-                </div>
-                <div class="demo-visual">
-                    <div class="demo-badge"><i class="fas fa-star"></i> 实时演示</div>
-                    <img src="https://github.com/user-attachments/assets/86918ca6-dd59-4fde-bacf-eef4dc668460" alt="灯塔 CMS 商品管理界面" class="demo-image">
-                </div>
-            </div>
+    <section class="extension-section" id="extensions">
+      <div class="container extension-layout">
+        <div class="extension-code-card">
+          <div class="code-card-head"><span>plugin.json</span><span>Plugin API 1.0</span></div>
+          <pre><code>{`{
+  "id": "lighthouse-commerce",
+  "name": "Commerce Toolkit",
+  "version": "1.0.0",
+  "routes": ["routes.php"],
+  "events": ["inquiry.created"],
+  "services": ["orders", "payments"],
+  "jobs": ["sync-catalog"]
+}`}</code></pre>
+          <div class="code-card-foot"><span><i class="fas fa-circle-check"></i> Manifest validated</span><span>0 runtime scans</span></div>
         </div>
+        <div class="extension-copy">
+          <span class="oss-section-label light">Extension platform</span>
+          <h2>从企业官网，扩展为业务平台</h2>
+          <p>插件通过 Manifest 描述能力，在启停时编译缓存。普通请求无需扫描插件目录，同时保留路由、事件、服务和任务等完整扩展面。</p>
+          <div class="extension-points">
+            <div><i class="fas fa-route"></i><span><strong>路由与 Webhook</strong>注册前台、后台、API 和外部回调。</span></div>
+            <div><i class="fas fa-bolt"></i><span><strong>事件与过滤器</strong>响应询盘、内容和系统生命周期。</span></div>
+            <div><i class="fas fa-cubes"></i><span><strong>业务服务契约</strong>组合订单、支付、会员与通知能力。</span></div>
+            <div><i class="fas fa-clock-rotate-left"></i><span><strong>任务与重试</strong>执行定时、分片任务并保留日志。</span></div>
+          </div>
+          <a href="/developer#plugins" class="btn oss-btn-light">查看插件开发文档 <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
     </section>
 
-    <!-- Community Section -->
-    <section class="community" id="community">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge"><i class="fas fa-book-open"></i> 文档与支持</div>
-                <h2 class="section-title">按角色阅读文档</h2>
-                <p class="section-desc">面向站点管理员、运营人员和主题开发者分别整理关键流程</p>
-            </div>
-            <div class="community-grid">
-                <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" class="community-card">
-                    <i class="fab fa-github"></i>
-                    <h3>GitHub</h3>
-                    <p>查看源码、提交 Issue、贡献代码</p>
-                </a>
-                <a href="/usage" class="community-card">
-                    <i class="fas fa-book"></i>
-                    <h3>使用文档</h3>
-                    <p>安装、登录、后台导航、内容维护、询盘处理和上线检查</p>
-                </a>
-                <a href="/developer" class="community-card">
-                    <i class="fas fa-code"></i>
-                    <h3>开发文档</h3>
-                    <p>MVC 架构、22 个迁移、插件运行时、主题模板和验收命令</p>
-                </a>
-                <a href="https://github.com/zhpelo/shopagg-b2b-website/pulls" target="_blank" class="community-card">
-                    <i class="fas fa-code-pull-request"></i>
-                    <h3>贡献代码</h3>
-                    <p>参与开发，一起完善项目</p>
-                </a>
-            </div>
+    <section class="oss-section architecture-section">
+      <div class="container architecture-layout">
+        <div class="architecture-copy">
+          <span class="oss-section-label">Portable by design</span>
+          <h2>轻量架构，不绑定运行平台</h2>
+          <p>核心程序保持纯 PHP + SQLite。官网本身由 Astro 构建为静态文件，Cloudflare 只是当前部署平台，随时可以迁移到 Nginx、Apache 或其他静态托管。</p>
+          <a href="/developer#architecture" class="text-link">查看请求生命周期 <i class="fas fa-arrow-right"></i></a>
         </div>
+        <div class="architecture-flow" aria-label="灯塔 CMS 架构流程">
+          <div><span>01</span><i class="fas fa-globe"></i><strong>Web Request</strong><small>Apache / Nginx</small></div>
+          <i class="fas fa-arrow-right"></i>
+          <div><span>02</span><i class="fas fa-code"></i><strong>PHP MVC</strong><small>Router / Controller</small></div>
+          <i class="fas fa-arrow-right"></i>
+          <div><span>03</span><i class="fas fa-database"></i><strong>SQLite</strong><small>Portable data</small></div>
+        </div>
+      </div>
     </section>
 
-    <!-- Showcase Section -->
-    <section class="showcase" id="showcase">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge"><i class="fas fa-layer-group"></i> 架构亮点</div>
-                <h2 class="section-title">轻量，但不是简陋</h2>
-                <p class="section-desc">保持零构建部署，同时给主题、内容和数据演进留下清晰边界</p>
-            </div>
-            <div class="community-grid">
-                <a href="/developer#architecture" class="community-card">
-                    <i class="fas fa-diagram-project"></i>
-                    <h3>MVC 单入口</h3>
-                    <p>index.php 初始化环境、自动加载、数据库迁移和路由分发</p>
-                </a>
-                <a href="/developer#migrations" class="community-card">
-                    <i class="fas fa-database"></i>
-                    <h3>版本化迁移</h3>
-                    <p>新增表结构通过时间戳迁移文件随访问自动执行</p>
-                </a>
-                <a href="/developer#themes" class="community-card">
-                    <i class="fas fa-palette"></i>
-                    <h3>主题可维护</h3>
-                    <p>区块、媒体、产品选择器和轮播下拉让客户可视化维护</p>
-                </a>
-                <a href="/developer#plugins" class="community-card">
-                    <i class="fas fa-plug"></i>
-                    <h3>插件可扩展</h3>
-                    <p>Manifest、路由、事件、服务契约和任务队列组成完整扩展面</p>
-                </a>
-            </div>
-            <div class="showcase-cta">
-                <p>需要更完整的源码说明？</p>
-                <a href="/developer" class="btn btn-outline">
-                    <i class="fas fa-arrow-right"></i> 阅读开发文档
-                </a>
-            </div>
+    <section class="resource-section">
+      <div class="container">
+        <div class="oss-section-heading centered"><div><span class="oss-section-label">Documentation & data</span><h2>为使用者、开发者和 AI 准备的项目资料</h2><p>同一套事实同时提供网页、Markdown 和 JSON 入口。</p></div></div>
+        <div class="resource-grid">
+          <a href="/usage" class="resource-card"><i class="fas fa-book-open"></i><div><span>For operators</span><h3>使用文档</h3><p>安装、配置、内容运营、询盘处理和上线检查。</p></div><i class="fas fa-arrow-right"></i></a>
+          <a href="/developer" class="resource-card"><i class="fas fa-code"></i><div><span>For developers</span><h3>开发文档</h3><p>MVC、迁移、插件、主题、权限和安全边界。</p></div><i class="fas fa-arrow-right"></i></a>
+          <a href="/api/capabilities.json" class="resource-card"><i class="fas fa-code"></i><div><span>For integrations</span><h3>静态 JSON API</h3><p>产品能力、项目资料、兼容性和版本发布数据。</p></div><i class="fas fa-arrow-right"></i></a>
+          <a href="/llms.txt" class="resource-card"><i class="fas fa-robot"></i><div><span>For AI</span><h3>llms.txt</h3><p>项目摘要、权威文档入口和完整机器上下文。</p></div><i class="fas fa-arrow-right"></i></a>
         </div>
+      </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <div class="section-badge"><i class="fas fa-heart"></i> 关于项目</div>
-                    <h3>源于实践，回馈社区</h3>
-                    <p>灯塔 CMS（Lighthouse CMS）原名 SHOPAGG B2B Website，由 SHOPAGG 开源。它诞生于外贸建站和企业官网交付场景，目标是在小型主机上也能快速部署、稳定维护、持续扩展。</p>
-                    <p>当前源码已经从展示型网站演进为可扩展的内容与业务平台：商品价格模式、客户消息、主题、区块、菜单、轮播、媒体、员工权限、应用商店、插件任务和程序更新都有清晰模块。</p>
-                    <p>项目采用 MIT 开源协议，可自由用于个人和商业项目。欢迎 Star、Fork、提交 PR，一起完善外贸企业开源建站方案。</p>
-                    <div class="about-team">
-                        <div class="team-avatars">
-                            <div class="avatar">L</div>
-                            <div class="avatar">H</div>
-                            <div class="avatar">C</div>
-                            <div class="avatar">M</div>
-                        </div>
-                        <div>
-                            <strong>Lighthouse CMS</strong>
-                            <p class="team-caption">由 SHOPAGG 开源维护</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-stats">
-                    <div class="about-stat">
-                        <i class="fab fa-github"></i>
-                        <div class="value">MIT</div>
-                        <div class="label">开源协议</div>
-                    </div>
-                    <div class="about-stat">
-                        <i class="fas fa-code"></i>
-                        <div class="value">PHP 8.1+</div>
-                        <div class="label">技术栈</div>
-                    </div>
-                    <div class="about-stat">
-                        <i class="fas fa-database"></i>
-                        <div class="value">SQLite</div>
-                        <div class="label">数据库</div>
-                    </div>
-                    <div class="about-stat">
-                        <i class="fas fa-layer-group"></i>
-                        <div class="value">MVC</div>
-                        <div class="label">架构模式</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section class="open-source-cta">
+      <div class="container open-source-cta-inner">
+        <div><span class="oss-section-label light">Open source, self-hosted</span><h2>把网站、数据和扩展能力掌握在自己手中</h2><p>自由用于个人或商业项目。欢迎 Star、提交 Issue、贡献主题与插件。</p></div>
+        <div class="oss-hero-actions"><a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" rel="noopener" class="btn oss-btn-light"><i class="fab fa-github"></i> Star on GitHub</a><a href="/usage#install" class="btn oss-btn-ghost">5 分钟开始部署</a></div>
+      </div>
     </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>点亮你的 B2B 官网</h2>
-                <p>立即部署灯塔 CMS，或先阅读文档确认安装、运营和插件扩展流程</p>
-            <div class="cta-buttons">
-                <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" class="btn btn-white btn-lg">
-                    <i class="fab fa-github"></i> 获取源码
-                </a>
-                <a href="/usage" class="btn btn-ghost btn-lg">
-                    <i class="fas fa-book-open"></i> 阅读使用文档
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
+  </main>
   <Footer />
+  <script is:inline src="/scripts/site.js"></script>
   <script is:inline src="/scripts/home.js"></script>
 </BaseLayout>

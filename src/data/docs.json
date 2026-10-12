@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "product": "lighthouse-cms",
+  "documents": [
+    {
+      "id": "usage",
+      "title": "灯塔 CMS 使用文档",
+      "audience": ["administrator", "operator", "sales"],
+      "url": "https://shopagg.org/usage",
+      "source_format": "markdown",
+      "version": "1.3.4"
+    },
+    {
+      "id": "developer",
+      "title": "灯塔 CMS 开发文档",
+      "audience": ["developer", "plugin-author", "theme-author"],
+      "url": "https://shopagg.org/developer",
+      "source_format": "markdown",
+      "version": "1.3.4"
+    },
+    {
+      "id": "capabilities",
+      "title": "灯塔 CMS 产品能力清单",
+      "audience": ["administrator", "developer", "evaluator"],
+      "url": "https://shopagg.org/capabilities",
+      "source_format": "json+html",
+      "version": "1.3.4"
+    }
+  ]
+}

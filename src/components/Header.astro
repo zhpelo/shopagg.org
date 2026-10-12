@@ -1,6 +1,6 @@
 ---
 interface Props {
-  active?: 'home' | 'usage' | 'developer';
+  active?: 'home' | 'capabilities' | 'releases' | 'usage' | 'developer';
 }
 
 const { active = 'home' } = Astro.props;
@@ -13,31 +13,29 @@ const { active = 'home' } = Astro.props;
       <span class="brand-copy"><span class="brand-name">灯塔 CMS</span><span class="brand-en">Lighthouse CMS</span></span>
     </a>
     <ul class="nav-links">
-      <li><a href="/#features">功能特性</a></li>
-      <li><a href="/#plugins">插件平台</a></li>
-      <li><a href="/#getstarted">快速开始</a></li>
-      <li><a href="/#demo">在线演示</a></li>
+      <li><a href="/capabilities" class:list={{ active: active === 'capabilities' }}>产品能力</a></li>
+      <li><a href="/#extensions">扩展能力</a></li>
       <li><a href="/usage" class:list={{ active: active === 'usage' }}>使用文档</a></li>
       <li><a href="/developer" class:list={{ active: active === 'developer' }}>开发文档</a></li>
-      <li><a href="/#about">关于</a></li>
+      <li><a href="/releases" class:list={{ active: active === 'releases' }}>版本发布</a></li>
     </ul>
     <div class="nav-buttons">
       <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" rel="noopener" class="btn btn-outline">
         <i class="fab fa-github"></i> GitHub
       </a>
-      <a href="https://demo.shopagg.org/" target="_blank" rel="noopener" class="btn btn-primary">立即体验</a>
+      <a href="https://demo.shopagg.org/" target="_blank" rel="noopener" class="btn btn-primary">在线演示</a>
     </div>
     <button class="mobile-menu-btn" type="button" aria-label="打开菜单" aria-controls="mobilePanel" aria-expanded="false" onclick="toggleMobileMenu()">
       <i class="fas fa-bars"></i>
     </button>
   </div>
   <div class="mobile-panel" id="mobilePanel">
-    <a href="/#features">功能特性</a>
-    <a href="/#plugins">插件平台</a>
-    <a href="/#getstarted">快速开始</a>
-    <a href="/#demo">在线演示</a>
+    <a href="/capabilities">产品能力</a>
+    <a href="/#extensions">扩展能力</a>
     <a href="/usage">使用文档</a>
     <a href="/developer">开发文档</a>
+    <a href="/releases">版本发布</a>
+    <a href="https://demo.shopagg.org/" target="_blank" rel="noopener">在线演示</a>
     <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" rel="noopener">GitHub</a>
   </div>
 </nav>

@@ -247,8 +247,8 @@ php shopagg plugin:jobs 20</code></pre></figure>
 <p><code>style.css</code> 顶部必须包含主题元数据：</p>
 <figure class="code-block"><pre><code class="language-css">/*
 Theme Name: Default
-Theme URI: https://www.shopagg.com
-Author: SHOPAGG
+Theme URI: https://shopagg.org
+Author: Lighthouse CMS
 Version: 1.0.0
 Description: Default Lighthouse CMS B2B theme.
 */</code></pre></figure>

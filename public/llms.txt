@@ -7,7 +7,13 @@
 - [项目介绍](https://shopagg.org/)
 - [使用文档](https://shopagg.org/usage)
 - [开发文档](https://shopagg.org/developer)
+- [产品能力清单](https://shopagg.org/capabilities)
+- [版本发布](https://shopagg.org/releases)
+- [完整项目上下文](https://shopagg.org/llms-full.txt)
 - [项目信息 JSON](https://shopagg.org/api/project.json)
+- [产品能力 JSON](https://shopagg.org/api/capabilities.json)
+- [文档索引 JSON](https://shopagg.org/api/docs/index.json)
+- [静态 API OpenAPI](https://shopagg.org/api/openapi.json)
 - [最新版本 JSON](https://shopagg.org/api/releases/latest.json)
 - [兼容性 JSON](https://shopagg.org/api/compatibility.json)
 - [GitHub](https://github.com/zhpelo/shopagg-b2b-website)
@@ -19,3 +25,4 @@
 - 开源许可证：MIT
 - 运行环境：PHP 8.1+、SQLite3
 - 主要用途：外贸企业官网、B2B 产品展示、询盘收集、内容管理和插件扩展
+- 数据入口：项目、产品能力、文档、兼容性和版本均提供静态 JSON

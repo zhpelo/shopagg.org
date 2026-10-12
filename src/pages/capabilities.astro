@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import capabilities from '../data/capabilities.json';
+import releases from '../data/releases.json';
+
+const title = '产品能力清单 - 灯塔 CMS（Lighthouse CMS）';
+const description = '查看灯塔 CMS 的产品、内容、询盘、主题、插件、运维、安全与 SEO 能力，以及对应的稳定状态。';
+const total = capabilities.groups.reduce((sum, group) => sum + group.items.length, 0);
+const iconClass = (icon: string) => `fas fa-${icon}`;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: '灯塔 CMS 产品能力清单',
+  description,
+  numberOfItems: total,
+  itemListElement: capabilities.groups.flatMap((group) => group.items).map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    description: item.summary
+  }))
+};
+---
+
+<BaseLayout {title} {description} canonicalPath="/capabilities" structuredData={structuredData}>
+  <Header active="capabilities" />
+  <main class="project-page">
+    <header class="project-hero compact">
+      <div class="container project-hero-grid">
+        <div>
+          <div class="project-eyebrow"><span class="status-dot"></span> Product capabilities · v{releases[0].version}</div>
+          <h1>一份可验证的产品能力清单</h1>
+          <p>能力数据由官网页面和 JSON API 共用。每项能力都对应当前稳定版的实际功能，方便选型、集成和 AI 检索。</p>
+          <div class="hero-buttons">
+            <a href="/api/capabilities.json" class="btn btn-primary"><i class="fas fa-code"></i> 查看 JSON</a>
+            <a href="/usage" class="btn btn-outline"><i class="fas fa-book-open"></i> 使用文档</a>
+          </div>
+        </div>
+        <div class="capability-summary-card">
+          <strong>{total}</strong><span>项稳定能力</span>
+          <strong>{capabilities.groups.length}</strong><span>个能力领域</span>
+          <strong>1</strong><span>份统一数据源</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="container capability-catalog">
+      {capabilities.groups.map((group) => (
+        <section class="capability-group" id={group.id}>
+          <div class="capability-group-heading">
+            <div class="capability-group-icon"><i class={iconClass(group.icon)}></i></div>
+            <div><h2>{group.name}</h2><p>{group.summary}</p></div>
+          </div>
+          <div class="capability-item-grid">
+            {group.items.map((item) => (
+              <article class="capability-item">
+                <div class="capability-item-top"><h3>{item.name}</h3><span class="stable-pill">Stable</span></div>
+                <p>{item.summary}</p>
+                <code>{item.id}</code>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </main>
+  <Footer />
+  <script is:inline src="/scripts/site.js"></script>
+</BaseLayout>
