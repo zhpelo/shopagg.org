@@ -13,4 +13,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://shopagg.org/sitemap-index.xml
+Sitemap: https://shopagg.org/sitemap.xml

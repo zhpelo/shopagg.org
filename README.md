@@ -43,7 +43,7 @@ npm run build
 
 搜索和 AI 入口：
 
-- `/sitemap-index.xml`
+- `/sitemap.xml`
 - `/robots.txt`
 - `/llms.txt`
 - `/llms-full.txt`
