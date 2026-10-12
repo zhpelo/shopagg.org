@@ -119,11 +119,11 @@ body {
 
 .brand-logo-mark {
     display: block;
-    width: 42px;
-    height: 52px;
+    width: 44px;
+    height: 44px;
     flex: 0 0 auto;
     object-fit: contain;
-    filter: drop-shadow(0 5px 8px rgba(15, 23, 42, 0.16));
+    filter: drop-shadow(0 5px 9px rgba(15, 23, 42, 0.18));
 }
 
 .brand-copy {
