@@ -15,20 +15,35 @@
 
 <section class="doc-section" id="install">
 <h2>安装部署</h2>
-<p>灯塔 CMS 的部署设计接近传统 PHP 虚拟主机体验，不需要 Composer、Node.js 或前端构建工具。准备好 PHP 和 SQLite 扩展后，上传源码并访问站点即可触发初始化。</p>
+<p>灯塔 CMS 支持 ShopAgg 自动部署和手动自托管两类方式。对于希望快速上线、减少服务器配置的用户，官方首选推荐 ShopAgg 自动部署。</p>
+<div class="deploy-recommendation">
+  <div class="deploy-recommendation-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+  <div class="deploy-recommendation-copy">
+    <span class="deploy-recommendation-label">官方首选</span>
+    <h3>ShopAgg 自动部署</h3>
+    <p>无需手动配置 PHP、Web 服务器、目录权限或数据库。按页面提示创建网站，系统会自动完成安装与初始化。</p>
+    <div class="deploy-recommendation-actions">
+      <a href="https://www.shopagg.com/dashboard/websites/create" target="_blank" rel="noopener" class="btn btn-primary">立即自动部署 <i class="fas fa-arrow-right"></i></a>
+      <a href="https://www.shopagg.com/courses/b2b-get-started" target="_blank" rel="noopener" class="deploy-video-link"><i class="fas fa-circle-play"></i> 观看完整视频教程</a>
+    </div>
+    <small>视频教程包含网站自动部署、首次登录以及网站后台的完整使用方法。</small>
+  </div>
+</div>
 <h3 id="运行环境要求">运行环境要求</h3>
+<p>使用 ShopAgg 自动部署时，以下环境会由平台准备。仅在选择手动部署时需要自行确认。</p>
 <div class="table-wrap"><table><thead><tr><th>项目</th><th>最低要求</th><th>说明</th></tr></thead><tbody><tr><td>PHP</td><td><code>8.1+</code></td><td>推荐使用当前稳定的 PHP 8.x 版本。</td></tr><tr><td>PHP 扩展</td><td><code>sqlite3</code>、<code>mbstring</code>、<code>fileinfo</code></td><td>SQLite 数据库、字符串处理、上传 MIME 校验依赖这些扩展。</td></tr><tr><td>Web 服务器</td><td>Apache 或 Nginx</td><td>Apache 需要启用 <code>mod_rewrite</code>；Nginx 使用 <code>try_files</code> 转发到 <code>index.php</code>。</td></tr><tr><td>写入目录</td><td><code>storage/</code>、<code>uploads/</code></td><td>数据库、区块配置、上传文件、备份和更新日志会写入这两个目录。</td></tr><tr><td>HTTPS</td><td>生产环境必备</td><td>表单、后台登录和客户询盘都应通过 HTTPS 提交。</td></tr></tbody></table></div>
 <h3 id="三种部署方式">三种部署方式</h3>
-<figure class="code-block"><figcaption>Git Clone</figcaption><pre><code class="language-bash">git clone https://github.com/zhpelo/shopagg-b2b-website.git
+<figure class="code-block"><figcaption>1. ShopAgg 自动部署（推荐）</figcaption><pre><code class="language-text">打开 https://www.shopagg.com/dashboard/websites/create
+按页面提示填写站点信息
+等待系统完成环境准备、程序安装和数据库初始化</code></pre></figure>
+<p>如果需要跟着操作，请观看 <a href="https://www.shopagg.com/courses/b2b-get-started" target="_blank" rel="noopener">B2B 建站完整视频教程</a>，课程同时覆盖自动部署和网站后台使用。</p>
+<figure class="code-block"><figcaption>2. Git Clone（手动部署）</figcaption><pre><code class="language-bash">git clone https://github.com/zhpelo/shopagg-b2b-website.git
 cd shopagg-b2b-website
 chmod -R 755 storage uploads</code></pre></figure>
-<figure class="code-block"><figcaption>ZIP 源码包</figcaption><pre><code class="language-bash">wget https://github.com/zhpelo/shopagg-b2b-website/archive/refs/heads/main.zip
+<figure class="code-block"><figcaption>3. ZIP 源码包（手动部署）</figcaption><pre><code class="language-bash">wget https://github.com/zhpelo/shopagg-b2b-website/archive/refs/heads/main.zip
 unzip main.zip
 mv shopagg-b2b-website-main shopagg-b2b-website
 chmod -R 755 shopagg-b2b-website/storage shopagg-b2b-website/uploads</code></pre></figure>
-<figure class="code-block"><figcaption>云端部署</figcaption><pre><code class="language-text">打开 https://www.shopagg.com/dashboard/b2b-sites/create
-按页面提示填写站点信息
-无需配置服务器、上传代码或手动初始化数据库</code></pre></figure>
 <h3 id="apache-配置要点">Apache 配置要点</h3>
 <p>源码内置 <code>.htaccess</code>，常规 Apache 环境只需要确保站点目录允许重写：</p>
 <figure class="code-block"><pre><code class="language-apache">AllowOverride All

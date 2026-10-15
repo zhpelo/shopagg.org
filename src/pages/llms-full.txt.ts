@@ -19,7 +19,7 @@ export function GET() {
     return lines;
   }).join('\n');
 
-  const body = `# ${project.name}（${project.alternate_name}）\n\n${project.description}\n\n## Project facts\n\n- 当前稳定版：${latest.version}\n- 开源许可证：${project.license}\n- 运行环境：PHP 8.1+、SQLite3\n- 源码仓库：${project.repository}\n- 产品能力 JSON：https://shopagg.org/api/capabilities.json\n- 版本数据：https://shopagg.org/api/releases/latest.json\n\n## Documentation\n\n${documentationText}\n\n${capabilityText}\n`;
+  const body = `# ${project.name}（${project.alternate_name}）\n\n${project.description}\n\n## Project facts\n\n- 当前稳定版：${latest.version}\n- 开源许可证：${project.license}\n- 运行环境：PHP 8.1+、SQLite3\n- 源码仓库：${project.repository}\n- 官方推荐自动部署：${project.deployment.recommended}\n- 自动部署与网站后台视频教程：${project.deployment.video_course}\n- 产品能力 JSON：https://shopagg.org/api/capabilities.json\n- 版本数据：https://shopagg.org/api/releases/latest.json\n\n## Documentation\n\n${documentationText}\n\n${capabilityText}\n`;
 
   return new Response(body, {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' }

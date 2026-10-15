@@ -15,6 +15,10 @@
     "llms": "https://shopagg.org/llms.txt",
     "llms_full": "https://shopagg.org/llms-full.txt"
   },
+  "deployment": {
+    "recommended": "https://www.shopagg.com/dashboard/websites/create",
+    "video_course": "https://www.shopagg.com/courses/b2b-get-started"
+  },
   "release_api": "https://shopagg.org/api/releases/latest.json",
   "capabilities_api": "https://shopagg.org/api/capabilities.json",
   "requirements": {

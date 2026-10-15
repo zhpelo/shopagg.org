@@ -6,6 +6,8 @@
 
 - [项目介绍](https://shopagg.org/)
 - [使用文档](https://shopagg.org/usage)
+- [ShopAgg 自动部署（官方推荐）](https://www.shopagg.com/dashboard/websites/create)
+- [自动部署与网站后台视频教程](https://www.shopagg.com/courses/b2b-get-started)
 - [开发文档](https://shopagg.org/developer)
 - [产品能力清单](https://shopagg.org/capabilities)
 - [版本发布](https://shopagg.org/releases)
@@ -25,4 +27,6 @@
 - 开源许可证：MIT
 - 运行环境：PHP 8.1+、SQLite3
 - 主要用途：外贸企业官网、B2B 产品展示、询盘收集、内容管理和插件扩展
+- 推荐部署：ShopAgg 自动部署，无需手动配置服务器或上传代码
+- 教程：提供自动部署和网站后台使用的完整视频课程
 - 数据入口：项目、产品能力、文档、兼容性和版本均提供静态 JSON

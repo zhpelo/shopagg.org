@@ -8,7 +8,7 @@ import capabilities from '../data/capabilities.json';
 const latest = releases[0];
 const version = latest.version;
 const title = '灯塔 CMS（Lighthouse CMS）- 开源 B2B 官网系统';
-const description = '灯塔 CMS 是面向中国工厂与外贸公司的开源 B2B 官网系统。基于 PHP 8.1+ 与 SQLite，自托管、可扩展，提供产品、询盘、内容、主题和插件平台。';
+const description = '灯塔 CMS 是面向中国工厂与外贸公司的开源 B2B 官网系统。支持 ShopAgg 自动部署，基于 PHP 8.1+ 与 SQLite，自托管、可扩展。';
 const featureNames = capabilities.groups.flatMap((group) => group.items.map((item) => item.name));
 const iconClass = (icon: string) => `fas fa-${icon}`;
 const structuredData = {
@@ -30,37 +30,37 @@ const structuredData = {
         <div class="oss-hero-copy">
           <div class="oss-kicker"><span class="status-dot"></span> Open source · MIT License · v{version}</div>
           <h1><span class="hero-title-line">为外贸业务而生</span><br /><span class="accent">开源 B2B CMS</span></h1>
-          <p>灯塔 CMS（Lighthouse CMS）把产品展示、内容运营、客户询盘和插件扩展放进一套轻量系统。PHP + SQLite，上传即可运行，数据和代码始终由你掌控。</p>
+          <p>灯塔 CMS（Lighthouse CMS）把产品展示、内容运营、客户询盘和插件扩展放进一套轻量系统。推荐使用 ShopAgg 自动部署，无需配置服务器或手动上传代码，更快开始建站。</p>
           <div class="oss-hero-actions">
-            <a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" rel="noopener" class="btn oss-btn-light"><i class="fab fa-github"></i> 查看 GitHub</a>
-            <a href="/usage/getting-started#install" class="btn oss-btn-ghost"><i class="fas fa-rocket"></i> 开始部署</a>
+            <a href="https://www.shopagg.com/dashboard/websites/create" target="_blank" rel="noopener" class="btn oss-btn-light"><i class="fas fa-cloud-arrow-up"></i> 立即自动部署</a>
+            <a href="https://www.shopagg.com/courses/b2b-get-started" target="_blank" rel="noopener" class="btn oss-btn-ghost"><i class="fas fa-circle-play"></i> 观看完整教程</a>
           </div>
           <div class="oss-trust-row">
-            <span><i class="fas fa-check"></i> 无 Composer 依赖</span>
-            <span><i class="fas fa-check"></i> 可部署到普通主机</span>
-            <span><i class="fas fa-check"></i> 支持二次开发</span>
+            <span><i class="fas fa-check"></i> 无需手动配置服务器</span>
+            <span><i class="fas fa-check"></i> 自动安装与初始化</span>
+            <span><i class="fas fa-check"></i> 配套后台使用视频</span>
           </div>
         </div>
 
-        <div class="repo-card" aria-label="灯塔 CMS 项目安装命令">
-          <div class="repo-card-head">
-            <div class="repo-dots"><span></span><span></span><span></span></div>
-            <span><i class="fab fa-github"></i> zhpelo / shopagg-b2b-website</span>
-            <span class="repo-public">Public</span>
+        <div class="deploy-card" aria-label="ShopAgg 自动部署灯塔 CMS">
+          <div class="deploy-card-head">
+            <div class="deploy-card-brand"><i class="fas fa-cloud"></i><span>ShopAgg 自动部署</span></div>
+            <span class="deploy-recommended">官方推荐</span>
           </div>
-          <div class="repo-card-body">
-            <div class="repo-branch"><span><i class="fas fa-code-branch"></i> main</span><span>PHP</span></div>
-            <div class="repo-file-list">
-              <div><i class="fas fa-folder"></i><span>app</span><small>核心 MVC 与插件运行时</small></div>
-              <div><i class="fas fa-folder"></i><span>themes</span><small>可替换前台主题</small></div>
-              <div><i class="fas fa-folder"></i><span>storage</span><small>SQLite 与运行数据</small></div>
-              <div><i class="fas fa-file-code"></i><span>index.php</span><small>应用单入口</small></div>
+          <div class="deploy-card-body">
+            <span class="deploy-card-kicker">No server setup required</span>
+            <h2>几步完成建站，专注你的外贸业务</h2>
+            <p>在 ShopAgg 创建网站后，系统会自动完成环境准备、程序安装和数据库初始化。</p>
+            <div class="deploy-steps">
+              <div><span>01</span><div><strong>创建网站</strong><small>填写站点基本信息</small></div></div>
+              <div><span>02</span><div><strong>自动部署</strong><small>无需上传代码和配置环境</small></div></div>
+              <div><span>03</span><div><strong>进入后台</strong><small>开始维护产品、内容和询盘</small></div></div>
             </div>
-            <div class="install-command">
-              <span>$</span><code>git clone https://github.com/zhpelo/shopagg-b2b-website.git</code>
-              <button type="button" onclick="copyInstallCommand()" aria-label="复制安装命令"><i class="far fa-copy"></i></button>
+            <div class="deploy-card-actions">
+              <a href="https://www.shopagg.com/dashboard/websites/create" target="_blank" rel="noopener" class="btn btn-primary">创建我的网站 <i class="fas fa-arrow-right"></i></a>
+              <a href="https://www.shopagg.com/courses/b2b-get-started" target="_blank" rel="noopener">观看部署与后台教程 <i class="fas fa-arrow-up-right-from-square"></i></a>
             </div>
-            <div class="repo-release"><span><i class="fas fa-tag"></i> Latest release</span><strong>v{version}</strong><a href="/releases">全部版本 <i class="fas fa-arrow-right"></i></a></div>
+            <div class="deploy-card-note"><i class="fas fa-circle-play"></i><span>视频课程包含自动部署和网站后台完整使用说明</span></div>
           </div>
         </div>
       </div>
@@ -176,8 +176,8 @@ const structuredData = {
 
     <section class="open-source-cta">
       <div class="container open-source-cta-inner">
-        <div><span class="oss-section-label light">Open source, self-hosted</span><h2>把网站、数据和扩展能力掌握在自己手中</h2><p>自由用于个人或商业项目。欢迎 Star、提交 Issue、贡献主题与插件。</p></div>
-        <div class="oss-hero-actions"><a href="https://github.com/zhpelo/shopagg-b2b-website" target="_blank" rel="noopener" class="btn oss-btn-light"><i class="fab fa-github"></i> Star on GitHub</a><a href="/usage/getting-started#install" class="btn oss-btn-ghost">5 分钟开始部署</a></div>
+        <div><span class="oss-section-label light">Deploy with ShopAgg</span><h2>现在就部署你的 B2B 官网</h2><p>使用 ShopAgg 自动完成安装与初始化，再跟随完整视频教程掌握网站后台。</p></div>
+        <div class="oss-hero-actions"><a href="https://www.shopagg.com/dashboard/websites/create" target="_blank" rel="noopener" class="btn oss-btn-light"><i class="fas fa-cloud-arrow-up"></i> 立即自动部署</a><a href="https://www.shopagg.com/courses/b2b-get-started" target="_blank" rel="noopener" class="btn oss-btn-ghost">观看视频教程</a></div>
       </div>
     </section>
   </main>
