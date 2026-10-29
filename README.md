@@ -1,6 +1,6 @@
-# 灯塔 CMS 官网
+# SHOPAGG CMS 官网
 
-灯塔 CMS（Lighthouse CMS）官网使用 Astro 构建。页面在构建阶段输出为纯静态 HTML、CSS、JavaScript 和 JSON，可以部署到 Cloudflare Workers Static Assets、Nginx、Apache 或任意静态托管服务。
+SHOPAGG CMS（思普艾格）官网使用 Astro 构建。页面在构建阶段输出为纯静态 HTML、CSS、JavaScript 和 JSON，可以部署到 Cloudflare Workers Static Assets、Nginx、Apache 或任意静态托管服务。
 
 ## 本地开发
 

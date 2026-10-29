@@ -1,8 +1,10 @@
 {
   "schema": 1,
-  "id": "lighthouse-cms",
-  "name": "灯塔 CMS",
-  "alternate_name": "Lighthouse CMS",
+  "id": "shopagg-cms",
+  "name": "SHOPAGG CMS",
+  "alternate_name": "SHOPAGG",
+  "chinese_name": "思普艾格",
+  "platform_name": "SHOPAGG 建站平台",
   "description": "面向中国工厂与外贸公司的开源 B2B 官网系统。",
   "license": "MIT",
   "homepage": "https://shopagg.org/",

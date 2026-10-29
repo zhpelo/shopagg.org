@@ -3,7 +3,7 @@ export const prerender = true;
 const document = {
   openapi: '3.1.0',
   info: {
-    title: '灯塔 CMS 官网静态 API',
+    title: 'SHOPAGG CMS 官网静态 API',
     version: '1.0.0',
     description: '在构建阶段生成的只读 JSON 接口，不依赖运行时服务。'
   },

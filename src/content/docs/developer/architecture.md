@@ -1,4 +1,4 @@
-<p>这份文档面向二次开发者、插件作者、主题作者和维护人员。它说明灯塔 CMS 的目录结构、请求生命周期、核心模块、数据库迁移、插件运行时、主题区块、安全边界和常见扩展方式。</p>
+<p>这份文档面向二次开发者、插件作者、主题作者和维护人员。它说明 SHOPAGG CMS 的目录结构、请求生命周期、核心模块、数据库迁移、插件运行时、主题区块、安全边界和常见扩展方式。</p>
 <div class="doc-intro-grid">
   <div class="doc-card">
     <h3>技术定位</h3>
@@ -9,7 +9,7 @@
     <p>插件 Manifest 与 Plugin API 是首选扩展面；控制器、模型、迁移和主题模板用于核心开发。</p>
   </div>
 </div>
-<div class="callout "><strong>当前版本</strong><p>本文档按 <code>灯塔 CMS v1.3.4</code> 编写。当前源码包含 22 个迁移文件、完整的 Plugin API 1.0、4 种商品价格模式和基于 Google Translate 的 249 种语言能力。</p></div>
+<div class="callout "><strong>当前版本</strong><p>本文档按 <code>SHOPAGG CMS v1.3.4</code> 编写。当前源码包含 22 个迁移文件、完整的 Plugin API 1.0、4 种商品价格模式和基于 Google Translate 的 249 种语言能力。</p></div>
 
 <section class="doc-section" id="stack">
 <h2>技术栈</h2>

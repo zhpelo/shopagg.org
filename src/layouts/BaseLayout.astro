@@ -14,7 +14,7 @@ const {
   title,
   description,
   type = 'website',
-  image = '/assets/images/lighthouse-logo-source.png',
+  image = '/assets/images/shopagg-logo-source.png',
   publishedTime,
   modifiedTime,
   structuredData,
@@ -34,7 +34,7 @@ const socialImage = new URL(image, Astro.site);
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonical} />
 
-    <meta property="og:site_name" content="灯塔 CMS" />
+    <meta property="og:site_name" content="SHOPAGG" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={type} />
@@ -50,7 +50,7 @@ const socialImage = new URL(image, Astro.site);
     <meta name="twitter:image" content={socialImage} />
 
     <title>{title}</title>
-    <link rel="icon" href="/assets/images/lighthouse-favicon.png" type="image/png" />
+    <link rel="icon" href="/assets/images/shopagg-favicon.png" type="image/png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="/assets/site.css" />
     {structuredData && (

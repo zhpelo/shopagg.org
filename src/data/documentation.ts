@@ -10,7 +10,7 @@ export const usageDocumentation: DocumentationPage[] = [
   {
     slug: 'getting-started',
     title: '安装与入门',
-    summary: 'ShopAgg 自动部署、完整视频教程、手动安装、首次登录和后台导航。',
+    summary: 'SHOPAGG 建站平台自动部署、完整视频教程、手动安装、首次登录和后台导航。',
     icon: 'fas fa-rocket',
     toc: [
       { id: '角色与阅读路线', label: '角色与阅读路线' },

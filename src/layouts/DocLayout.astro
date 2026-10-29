@@ -41,13 +41,14 @@ const structuredData = {
   mainEntityOfPage: canonical,
   author: {
     '@type': 'Organization',
-    name: '灯塔 CMS',
+    name: 'SHOPAGG',
+    alternateName: '思普艾格',
     url: 'https://shopagg.org/'
   },
   isPartOf: {
     '@type': 'WebSite',
-    name: '灯塔 CMS',
-    alternateName: 'Lighthouse CMS',
+    name: 'SHOPAGG',
+    alternateName: ['思普艾格', 'SHOPAGG CMS'],
     url: 'https://shopagg.org/'
   }
 };
@@ -59,7 +60,7 @@ const structuredData = {
   <header class="docs-header">
     <div class="container">
       <nav class="docs-breadcrumb" aria-label="面包屑导航">
-        <a href="/">灯塔 CMS</a><i class="fas fa-chevron-right"></i>
+        <a href="/">SHOPAGG</a><i class="fas fa-chevron-right"></i>
         {props.overview ? <span>{rootLabel}</span> : <><a href={rootPath}>{rootLabel}</a><i class="fas fa-chevron-right"></i><span>{props.heading}</span></>}
       </nav>
       <div class="docs-header-copy">

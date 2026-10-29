@@ -1,12 +1,12 @@
-# 灯塔 CMS（Lighthouse CMS）
+# SHOPAGG CMS（思普艾格）
 
-> 灯塔 CMS 是面向中国工厂与外贸公司的开源 B2B 官网系统，基于 PHP 8.1+ 与 SQLite，内置产品、询盘、内容、主题、应用商店和插件平台。
+> SHOPAGG CMS 是面向中国工厂与外贸公司的开源 B2B 官网系统，基于 PHP 8.1+ 与 SQLite，内置产品、询盘、内容、主题、应用商店和插件平台。
 
 ## Documentation
 
 - [项目介绍](https://shopagg.org/)
 - [使用文档](https://shopagg.org/usage)
-- [ShopAgg 自动部署（官方推荐）](https://www.shopagg.com/dashboard/websites/create)
+- [SHOPAGG 建站平台自动部署（官方推荐）](https://www.shopagg.com/dashboard/websites/create)
 - [自动部署与网站后台视频教程](https://www.shopagg.com/courses/b2b-get-started)
 - [开发文档](https://shopagg.org/developer)
 - [产品能力清单](https://shopagg.org/capabilities)
@@ -22,11 +22,14 @@
 
 ## Project facts
 
-- 中文名：灯塔 CMS
-- 英文名：Lighthouse CMS
+- 主品牌：SHOPAGG
+- 中文名称：思普艾格
+- 开源程序正式名称：SHOPAGG CMS
+- 程序日常简称：SHOPAGG
+- 托管平台：SHOPAGG 建站平台
 - 开源许可证：MIT
 - 运行环境：PHP 8.1+、SQLite3
 - 主要用途：外贸企业官网、B2B 产品展示、询盘收集、内容管理和插件扩展
-- 推荐部署：ShopAgg 自动部署，无需手动配置服务器或上传代码
+- 推荐部署：通过 SHOPAGG 建站平台自动部署，无需手动配置服务器或上传代码
 - 教程：提供自动部署和网站后台使用的完整视频课程
 - 数据入口：项目、产品能力、文档、兼容性和版本均提供静态 JSON

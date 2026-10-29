@@ -1,11 +1,11 @@
-<p>这份文档面向网站管理员、运营人员、商品维护人员和销售跟单人员。目标是让团队不用阅读源码，也能完成灯塔 CMS 的部署、后台配置、内容维护、询盘处理、插件管理和上线检查。</p>
+<p>这份文档面向网站管理员、运营人员、商品维护人员和销售跟单人员。目标是让团队不用阅读源码，也能完成 SHOPAGG CMS 的部署、后台配置、内容维护、询盘处理、插件管理和上线检查。</p>
 <div class="doc-metric-grid">
   <div class="doc-metric"><strong>1.3.4</strong><span>当前源码版本</span></div>
   <div class="doc-metric"><strong>249</strong><span>Google Translate 在线翻译语言</span></div>
   <div class="doc-metric"><strong>22</strong><span>版本化数据库迁移</span></div>
   <div class="doc-metric"><strong>0</strong><span>运行期外部 PHP 包依赖</span></div>
 </div>
-<div class="callout "><strong>适用范围</strong><p>本文档按 <code>灯塔 CMS v1.3.4</code> 编写。后台入口通常是 <code>/admin/login</code>，演示环境常见初始账号为 <code>admin</code> / <code>admin123</code>。生产环境首次登录后必须立即修改默认密码。</p></div>
+<div class="callout "><strong>适用范围</strong><p>本文档按 <code>SHOPAGG CMS v1.3.4</code> 编写。后台入口通常是 <code>/admin/login</code>，演示环境常见初始账号为 <code>admin</code> / <code>admin123</code>。生产环境首次登录后必须立即修改默认密码。</p></div>
 
 <section class="doc-section" id="角色与阅读路线">
 <h2>角色与阅读路线</h2>
@@ -15,12 +15,12 @@
 
 <section class="doc-section" id="install">
 <h2>安装部署</h2>
-<p>灯塔 CMS 支持 ShopAgg 自动部署和手动自托管两类方式。对于希望快速上线、减少服务器配置的用户，官方首选推荐 ShopAgg 自动部署。</p>
+<p>SHOPAGG CMS 支持通过 SHOPAGG 建站平台自动部署，也支持手动自托管。对于希望快速上线、减少服务器配置的用户，官方首选推荐 SHOPAGG 建站平台。</p>
 <div class="deploy-recommendation">
   <div class="deploy-recommendation-icon"><i class="fas fa-cloud-arrow-up"></i></div>
   <div class="deploy-recommendation-copy">
     <span class="deploy-recommendation-label">官方首选</span>
-    <h3>ShopAgg 自动部署</h3>
+    <h3>SHOPAGG 建站平台自动部署</h3>
     <p>无需手动配置 PHP、Web 服务器、目录权限或数据库。按页面提示创建网站，系统会自动完成安装与初始化。</p>
     <div class="deploy-recommendation-actions">
       <a href="https://www.shopagg.com/dashboard/websites/create" target="_blank" rel="noopener" class="btn btn-primary">立即自动部署 <i class="fas fa-arrow-right"></i></a>
@@ -30,10 +30,10 @@
   </div>
 </div>
 <h3 id="运行环境要求">运行环境要求</h3>
-<p>使用 ShopAgg 自动部署时，以下环境会由平台准备。仅在选择手动部署时需要自行确认。</p>
+<p>使用 SHOPAGG 建站平台自动部署时，以下环境会由平台准备。仅在选择手动部署时需要自行确认。</p>
 <div class="table-wrap"><table><thead><tr><th>项目</th><th>最低要求</th><th>说明</th></tr></thead><tbody><tr><td>PHP</td><td><code>8.1+</code></td><td>推荐使用当前稳定的 PHP 8.x 版本。</td></tr><tr><td>PHP 扩展</td><td><code>sqlite3</code>、<code>mbstring</code>、<code>fileinfo</code></td><td>SQLite 数据库、字符串处理、上传 MIME 校验依赖这些扩展。</td></tr><tr><td>Web 服务器</td><td>Apache 或 Nginx</td><td>Apache 需要启用 <code>mod_rewrite</code>；Nginx 使用 <code>try_files</code> 转发到 <code>index.php</code>。</td></tr><tr><td>写入目录</td><td><code>storage/</code>、<code>uploads/</code></td><td>数据库、区块配置、上传文件、备份和更新日志会写入这两个目录。</td></tr><tr><td>HTTPS</td><td>生产环境必备</td><td>表单、后台登录和客户询盘都应通过 HTTPS 提交。</td></tr></tbody></table></div>
 <h3 id="三种部署方式">三种部署方式</h3>
-<figure class="code-block"><figcaption>1. ShopAgg 自动部署（推荐）</figcaption><pre><code class="language-text">打开 https://www.shopagg.com/dashboard/websites/create
+<figure class="code-block"><figcaption>1. SHOPAGG 建站平台自动部署（推荐）</figcaption><pre><code class="language-text">打开 https://www.shopagg.com/dashboard/websites/create
 按页面提示填写站点信息
 等待系统完成环境准备、程序安装和数据库初始化</code></pre></figure>
 <p>如果需要跟着操作，请观看 <a href="https://www.shopagg.com/courses/b2b-get-started" target="_blank" rel="noopener">B2B 建站完整视频教程</a>，课程同时覆盖自动部署和网站后台使用。</p>

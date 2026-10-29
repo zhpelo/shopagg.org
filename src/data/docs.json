@@ -1,10 +1,10 @@
 {
   "schema": 2,
-  "product": "lighthouse-cms",
+  "product": "shopagg-cms",
   "documents": [
     {
       "id": "usage",
-      "title": "灯塔 CMS 使用文档",
+      "title": "SHOPAGG CMS 使用文档",
       "audience": ["administrator", "operator", "sales"],
       "url": "https://shopagg.org/usage",
       "source_format": "markdown",
@@ -20,7 +20,7 @@
     },
     {
       "id": "developer",
-      "title": "灯塔 CMS 开发文档",
+      "title": "SHOPAGG CMS 开发文档",
       "audience": ["developer", "plugin-author", "theme-author"],
       "url": "https://shopagg.org/developer",
       "source_format": "markdown",
@@ -37,7 +37,7 @@
     },
     {
       "id": "capabilities",
-      "title": "灯塔 CMS 产品能力清单",
+      "title": "SHOPAGG CMS 产品能力清单",
       "audience": ["administrator", "developer", "evaluator"],
       "url": "https://shopagg.org/capabilities",
       "source_format": "json+html",

@@ -5,14 +5,14 @@ import Footer from '../components/Footer.astro';
 import capabilities from '../data/capabilities.json';
 import releases from '../data/releases.json';
 
-const title = '产品能力清单 - 灯塔 CMS（Lighthouse CMS）';
-const description = '查看灯塔 CMS 的产品、内容、询盘、主题、插件、运维、安全与 SEO 能力，以及对应的稳定状态。';
+const title = '产品能力清单 - SHOPAGG CMS（思普艾格）';
+const description = '查看 SHOPAGG CMS 的产品、内容、询盘、主题、插件、运维、安全与 SEO 能力，以及对应的稳定状态。';
 const total = capabilities.groups.reduce((sum, group) => sum + group.items.length, 0);
 const iconClass = (icon: string) => `fas fa-${icon}`;
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: '灯塔 CMS 产品能力清单',
+  name: 'SHOPAGG CMS 产品能力清单',
   description,
   numberOfItems: total,
   itemListElement: capabilities.groups.flatMap((group) => group.items).map((item, index) => ({

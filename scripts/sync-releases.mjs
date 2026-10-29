@@ -3,10 +3,10 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const repository = process.env.LIGHTHOUSE_CMS_REPOSITORY || 'zhpelo/shopagg-b2b-website';
+const repository = process.env.SHOPAGG_CMS_REPOSITORY || 'zhpelo/shopagg-b2b-website';
 const headers = {
   Accept: 'application/vnd.github+json',
-  'User-Agent': 'lighthouse-cms-website-release-sync',
+  'User-Agent': 'shopagg-cms-website-release-sync',
   'X-GitHub-Api-Version': '2022-11-28'
 };
 

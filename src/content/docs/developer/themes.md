@@ -21,9 +21,9 @@
 <figure class="code-block"><pre><code class="language-css">/*
 Theme Name: Default
 Theme URI: https://shopagg.org
-Author: Lighthouse CMS
+Author: SHOPAGG
 Version: 1.0.0
-Description: Default Lighthouse CMS B2B theme.
+Description: Default SHOPAGG CMS B2B theme.
 */</code></pre></figure>
 <h3 id="主题渲染机制">主题渲染机制</h3>
 <p><code>Controller::render()</code> 会根据系统设置中的当前主题加载模板。如果目标主题不存在，系统回退到 <code>themes/default/</code>。</p>

@@ -7,16 +7,16 @@ import capabilities from '../data/capabilities.json';
 
 const latest = releases[0];
 const version = latest.version;
-const title = '灯塔 CMS（Lighthouse CMS）- 开源 B2B 官网系统';
-const description = '灯塔 CMS 是面向中国工厂与外贸公司的开源 B2B 官网系统。支持 ShopAgg 自动部署，基于 PHP 8.1+ 与 SQLite，自托管、可扩展。';
+const title = 'SHOPAGG CMS（思普艾格）- 开源 B2B 官网系统';
+const description = 'SHOPAGG CMS 是面向中国工厂与外贸公司的开源 B2B 官网系统。支持通过 SHOPAGG 建站平台自动部署，基于 PHP 8.1+ 与 SQLite，自托管、可扩展。';
 const featureNames = capabilities.groups.flatMap((group) => group.items.map((item) => item.name));
 const iconClass = (icon: string) => `fas fa-${icon}`;
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'WebSite', '@id': 'https://shopagg.org/#website', url: 'https://shopagg.org/', name: '灯塔 CMS', alternateName: 'Lighthouse CMS', inLanguage: 'zh-CN' },
-    { '@type': 'Organization', '@id': 'https://shopagg.org/#organization', name: '灯塔 CMS', alternateName: 'Lighthouse CMS', url: 'https://shopagg.org/', logo: 'https://shopagg.org/assets/images/lighthouse-logo-source.png', sameAs: ['https://github.com/zhpelo/shopagg-b2b-website'] },
-    { '@type': 'SoftwareApplication', '@id': 'https://shopagg.org/#software', name: '灯塔 CMS', alternateName: 'Lighthouse CMS', applicationCategory: 'BusinessApplication', operatingSystem: 'Linux, Windows, macOS', softwareRequirements: 'PHP 8.1+、SQLite3', softwareVersion: version, license: 'https://github.com/zhpelo/shopagg-b2b-website/blob/main/LICENSE', url: 'https://shopagg.org/', downloadUrl: latest.package.url, codeRepository: 'https://github.com/zhpelo/shopagg-b2b-website', featureList: featureNames, description }
+    { '@type': 'WebSite', '@id': 'https://shopagg.org/#website', url: 'https://shopagg.org/', name: 'SHOPAGG', alternateName: ['思普艾格', 'SHOPAGG CMS'], inLanguage: 'zh-CN' },
+    { '@type': 'Organization', '@id': 'https://shopagg.org/#organization', name: 'SHOPAGG', alternateName: '思普艾格', url: 'https://shopagg.org/', logo: 'https://shopagg.org/assets/images/shopagg-logo-source.png', sameAs: ['https://github.com/zhpelo/shopagg-b2b-website'] },
+    { '@type': 'SoftwareApplication', '@id': 'https://shopagg.org/#software', name: 'SHOPAGG CMS', alternateName: 'SHOPAGG', applicationCategory: 'BusinessApplication', operatingSystem: 'Linux, Windows, macOS', softwareRequirements: 'PHP 8.1+、SQLite3', softwareVersion: version, license: 'https://github.com/zhpelo/shopagg-b2b-website/blob/main/LICENSE', url: 'https://shopagg.org/', downloadUrl: latest.package.url, codeRepository: 'https://github.com/zhpelo/shopagg-b2b-website', featureList: featureNames, description }
   ]
 };
 ---
@@ -30,7 +30,7 @@ const structuredData = {
         <div class="oss-hero-copy">
           <div class="oss-kicker"><span class="status-dot"></span> Open source · MIT License · v{version}</div>
           <h1><span class="hero-title-line">为外贸业务而生</span><br /><span class="accent">开源 B2B CMS</span></h1>
-          <p>灯塔 CMS（Lighthouse CMS）把产品展示、内容运营、客户询盘和插件扩展放进一套轻量系统。推荐使用 ShopAgg 自动部署，无需配置服务器或手动上传代码，更快开始建站。</p>
+          <p>SHOPAGG CMS 把产品展示、内容运营、客户询盘和插件扩展放进一套轻量系统。推荐通过 SHOPAGG 建站平台自动部署，无需配置服务器或手动上传代码，更快开始建站。</p>
           <div class="oss-hero-actions">
             <a href="https://www.shopagg.com/dashboard/websites/create" target="_blank" rel="noopener" class="btn oss-btn-light"><i class="fas fa-cloud-arrow-up"></i> 立即自动部署</a>
             <a href="https://www.shopagg.com/courses/b2b-get-started" target="_blank" rel="noopener" class="btn oss-btn-ghost"><i class="fas fa-circle-play"></i> 观看完整教程</a>
@@ -42,15 +42,15 @@ const structuredData = {
           </div>
         </div>
 
-        <div class="deploy-card" aria-label="ShopAgg 自动部署灯塔 CMS">
+        <div class="deploy-card" aria-label="SHOPAGG 建站平台自动部署 SHOPAGG CMS">
           <div class="deploy-card-head">
-            <div class="deploy-card-brand"><i class="fas fa-cloud"></i><span>ShopAgg 自动部署</span></div>
+            <div class="deploy-card-brand"><i class="fas fa-cloud"></i><span>SHOPAGG 建站平台</span></div>
             <span class="deploy-recommended">官方推荐</span>
           </div>
           <div class="deploy-card-body">
             <span class="deploy-card-kicker">No server setup required</span>
             <h2>几步完成建站，专注你的外贸业务</h2>
-            <p>在 ShopAgg 创建网站后，系统会自动完成环境准备、程序安装和数据库初始化。</p>
+            <p>在 SHOPAGG 建站平台创建网站后，系统会自动完成环境准备、程序安装和数据库初始化。</p>
             <div class="deploy-steps">
               <div><span>01</span><div><strong>创建网站</strong><small>填写站点基本信息</small></div></div>
               <div><span>02</span><div><strong>自动部署</strong><small>无需上传代码和配置环境</small></div></div>
@@ -109,7 +109,7 @@ const structuredData = {
         </div>
         <div class="app-window">
           <div class="app-window-bar"><div><span></span><span></span><span></span></div><span>demo.shopagg.org/admin</span><span class="live-indicator">Live</span></div>
-          <img src="https://github.com/user-attachments/assets/86918ca6-dd59-4fde-bacf-eef4dc668460" alt="灯塔 CMS 商品管理后台" loading="lazy" />
+          <img src="https://github.com/user-attachments/assets/86918ca6-dd59-4fde-bacf-eef4dc668460" alt="SHOPAGG CMS 商品管理后台" loading="lazy" />
         </div>
       </div>
     </section>
@@ -119,7 +119,7 @@ const structuredData = {
         <div class="extension-code-card">
           <div class="code-card-head"><span>plugin.json</span><span>Plugin API 1.0</span></div>
           <pre><code>{`{
-  "id": "lighthouse-commerce",
+  "id": "shopagg-commerce",
   "name": "Commerce Toolkit",
   "version": "1.0.0",
   "routes": ["routes.php"],
@@ -149,10 +149,10 @@ const structuredData = {
         <div class="architecture-copy">
           <span class="oss-section-label">Portable by design</span>
           <h2>轻量架构，不绑定运行平台</h2>
-          <p>灯塔 CMS 基于纯 PHP + SQLite，不绑定特定框架或云平台，可部署到 Nginx、Apache 以及常见的 PHP 主机，站点代码与业务数据都能自主迁移。</p>
+          <p>SHOPAGG CMS 基于纯 PHP + SQLite，不绑定特定框架或云平台，可部署到 Nginx、Apache 以及常见的 PHP 主机，站点代码与业务数据都能自主迁移。</p>
           <a href="/developer/architecture#architecture" class="text-link">查看请求生命周期 <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="architecture-flow" aria-label="灯塔 CMS 架构流程">
+        <div class="architecture-flow" aria-label="SHOPAGG CMS 架构流程">
           <div><span>01</span><i class="fas fa-globe"></i><strong>Web Request</strong><small>Apache / Nginx</small></div>
           <i class="fas fa-arrow-right"></i>
           <div><span>02</span><i class="fas fa-code"></i><strong>PHP MVC</strong><small>Router / Controller</small></div>
@@ -176,7 +176,7 @@ const structuredData = {
 
     <section class="open-source-cta">
       <div class="container open-source-cta-inner">
-        <div><span class="oss-section-label light">Deploy with ShopAgg</span><h2>现在就部署你的 B2B 官网</h2><p>使用 ShopAgg 自动完成安装与初始化，再跟随完整视频教程掌握网站后台。</p></div>
+        <div><span class="oss-section-label light">Deploy with SHOPAGG</span><h2>现在就部署你的 B2B 官网</h2><p>使用 SHOPAGG 建站平台自动完成安装与初始化，再跟随完整视频教程掌握网站后台。</p></div>
         <div class="oss-hero-actions"><a href="https://www.shopagg.com/dashboard/websites/create" target="_blank" rel="noopener" class="btn oss-btn-light"><i class="fas fa-cloud-arrow-up"></i> 立即自动部署</a><a href="https://www.shopagg.com/courses/b2b-get-started" target="_blank" rel="noopener" class="btn oss-btn-ghost">观看视频教程</a></div>
       </div>
     </section>

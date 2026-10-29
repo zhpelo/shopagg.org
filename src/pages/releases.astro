@@ -5,8 +5,8 @@ import Footer from '../components/Footer.astro';
 import releases from '../data/releases.json';
 
 const latest = releases[0];
-const title = '版本发布 - 灯塔 CMS（Lighthouse CMS）';
-const description = '查看灯塔 CMS 当前稳定版、历史发布记录、源码包和机器可读的版本更新数据。';
+const title = '版本发布 - SHOPAGG CMS（思普艾格）';
+const description = '查看 SHOPAGG CMS 当前稳定版、历史发布记录、源码包和机器可读的版本更新数据。';
 const formatDate = (value: string) => new Intl.DateTimeFormat('zh-CN', { timeZone: 'Asia/Shanghai', year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(value));
 ---
 
@@ -17,7 +17,7 @@ const formatDate = (value: string) => new Intl.DateTimeFormat('zh-CN', { timeZon
       <div class="container project-hero-grid">
         <div>
           <div class="project-eyebrow"><span class="status-dot"></span> Stable release</div>
-          <h1>灯塔 CMS v{latest.version}</h1>
+          <h1>SHOPAGG CMS v{latest.version}</h1>
           <p>稳定版本来自 GitHub Releases，并在官网构建时同步为静态 JSON。CMS 更新程序、官网和第三方工具可以读取同一份版本数据。</p>
           <div class="hero-buttons">
             <a href={latest.release_url} target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-github"></i> 查看 Release</a>
