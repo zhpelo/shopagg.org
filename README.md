@@ -50,13 +50,14 @@ npm run build
 
 ## 发布流程
 
-`.github/workflows/deploy.yml` 会在 `main` 更新、每天定时任务或手动触发时：
+`.github/workflows/deploy.yml` 会在 `main` 更新、每小时定时任务、Release 仓库派发事件或手动触发时：
 
 1. 同步 `zhpelo/shopagg-b2b-website` 的稳定版 GitHub Releases。
-2. 校验并构建 Astro 静态站点。
-3. 使用 Wrangler 部署到 `shopagg-org` Cloudflare Worker。
+2. 发现版本变化时，自动提交 `releases.json` 和兼容性数据，以便 Cloudflare Git 集成触发重新构建。
+3. 校验并构建 Astro 静态站点。
+4. 如果仓库配置了 Cloudflare Secrets，同时使用 Wrangler 直接部署到 `shopagg-org` Cloudflare Worker。
 
-GitHub 仓库需要配置以下 Actions Secrets：
+如需由 GitHub Actions 直接部署 Cloudflare，需配置以下 Actions Secrets；如已使用 Cloudflare Git 集成，则可以不配置：
 
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`

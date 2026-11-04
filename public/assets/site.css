@@ -2793,6 +2793,63 @@ pre code {
 .release-current-card dt { color: #7f8aa0; }
 .release-current-card dd { margin: 0; color: #d9deea; }
 .release-current-card a { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; color: #a8b0ff; text-decoration: none; }
+.release-latest { padding-top: 88px; }
+.release-sync-banner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 22px;
+    padding: 26px 28px;
+    color: #dce4f3;
+    border: 1px solid #202a43;
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at 82% 0, rgba(56,189,248,.14), transparent 32%),
+        linear-gradient(135deg, #0d1426, #141d34);
+    box-shadow: 0 18px 44px rgba(19,27,51,.12);
+}
+.release-sync-icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 15px;
+    background: rgba(255,255,255,.07);
+    font-size: 1.45rem;
+}
+.release-sync-copy > span,
+.release-notes-heading span {
+    color: #67e8f9;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+.release-sync-copy h2 { margin: 5px 0 6px; color: #fff; font-size: 1.15rem; }
+.release-sync-copy p { margin: 0; color: #8f9bb0; font-size: .84rem; line-height: 1.65; }
+.release-sync-actions { display: grid; justify-items: end; gap: 9px; }
+.release-sync-actions span { color: #86efac; font-size: .75rem; font-weight: 750; }
+.release-sync-actions span i { margin-right: 5px; }
+.release-sync-actions a { color: #aeb4ff; text-decoration: none; font-size: .77rem; font-weight: 750; }
+.release-notes-card {
+    margin-top: 24px;
+    padding: 36px;
+    border: 1px solid var(--oss-line);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 18px 42px rgba(35,29,82,.06);
+}
+.release-notes-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 28px; }
+.release-notes-heading span { color: var(--primary); }
+.release-notes-heading h2 { margin: 6px 0 7px; color: var(--oss-ink); font-size: 1.75rem; letter-spacing: -.025em; }
+.release-notes-heading p { margin: 0; color: var(--oss-muted); font-size: .86rem; }
+.release-notes-heading a { flex: 0 0 auto; color: var(--primary-dark); text-decoration: none; font-size: .82rem; font-weight: 750; }
+.release-notes-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; margin: 0; padding: 0; list-style: none; }
+.release-notes-grid li { display: flex; align-items: flex-start; gap: 10px; padding: 13px 15px; color: #4b5565; border-radius: 10px; background: #f8f9fc; font-size: .86rem; line-height: 1.55; }
+.release-notes-grid li i { margin-top: 4px; color: #22c55e; font-size: .7rem; }
+.release-notes-empty { margin: 0; color: var(--oss-muted); }
 .project-section-heading span { color: var(--primary); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .project-section-heading > a { color: var(--primary-dark); text-decoration: none; font-weight: 700; }
 .release-list { position: relative; border-left: 1px solid #dfe2e9; }
@@ -2835,6 +2892,10 @@ pre code {
     .release-row { grid-template-columns: 1fr auto; gap: 7px 20px; padding-top: 18px; padding-bottom: 18px; }
     .release-row time { grid-column: 1; }
     .release-actions { grid-column: 2; grid-row: 1 / span 2; }
+    .release-sync-banner { grid-template-columns: auto 1fr; }
+    .release-sync-actions { grid-column: 2; justify-items: start; }
+    .release-notes-heading { align-items: flex-start; flex-direction: column; }
+    .release-notes-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
@@ -2860,6 +2921,7 @@ pre code {
     .resource-section,
     .release-history,
     .capability-catalog { padding: 76px 0; }
+    .release-history { padding-left: 24px; padding-right: 24px; }
     .oss-capability-grid,
     .capability-item-grid,
     .extension-points { grid-template-columns: 1fr; }
@@ -2877,6 +2939,11 @@ pre code {
     .capability-item p { min-height: 0; }
     .release-row { grid-template-columns: 1fr; padding-left: 26px; }
     .release-actions { grid-column: 1; grid-row: auto; }
+    .release-latest { padding-top: 60px; }
+    .release-sync-banner { grid-template-columns: 1fr; padding: 22px; }
+    .release-sync-actions { grid-column: 1; }
+    .release-notes-card { padding: 24px; }
+    .release-notes-heading h2 { font-size: 1.45rem; }
 }
 
 /* ==================== Multi-page documentation ==================== */

@@ -5,11 +5,14 @@ on:
     branches:
       - main
   schedule:
-    - cron: '17 2 * * *'
+    - cron: '17 * * * *'
+  repository_dispatch:
+    types:
+      - shopagg-cms-release
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: shopagg-org-production
@@ -34,10 +37,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Sync Lighthouse CMS releases
+      - name: Sync SHOPAGG CMS releases
         run: npm run sync:releases
         env:
           GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Persist release updates
+        run: |
+          if git diff --quiet -- src/data/releases.json src/data/compatibility.json; then
+            echo "Release data is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/releases.json src/data/compatibility.json
+          git commit -m "chore: sync SHOPAGG CMS releases"
+          git push origin HEAD:main
 
       - name: Validate Astro
         run: npm run check

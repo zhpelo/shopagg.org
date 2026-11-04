@@ -20,17 +20,28 @@ if (!response.ok) {
 }
 
 const sourceReleases = await response.json();
+const normalizeReleaseNotes = (value) => String(value || '')
+  .replace(/灯塔\s*CMS/gi, 'SHOPAGG CMS')
+  .replace(/Lighthouse\s*CMS/gi, 'SHOPAGG CMS')
+  .replace(/Lighthouse/gi, 'SHOPAGG')
+  .split(/\r?\n/)
+  .map((line) => line.trim().replace(/^#{1,6}\s*/, '').replace(/^[-*]\s+/, ''))
+  .filter(Boolean)
+  .slice(0, 12);
+
 const releases = sourceReleases
   .filter((release) => !release.draft && !release.prerelease)
-  .map((release) => {
+  .map((release, index) => {
     const version = String(release.tag_name || '').replace(/^v/, '');
     const packageAsset = release.assets.find((asset) => /\.zip$/i.test(asset.name));
     return {
       version,
       tag: release.tag_name,
+      name: release.name || release.tag_name,
       channel: 'stable',
       published_at: release.published_at,
       release_url: release.html_url,
+      notes: index === 0 ? normalizeReleaseNotes(release.body) : [],
       package: {
         url: packageAsset?.browser_download_url || `https://github.com/${repository}/archive/refs/tags/${release.tag_name}.zip`,
         sha256: packageAsset?.digest?.replace(/^sha256:/, '') || null,
