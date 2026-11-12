@@ -1,21 +1,37 @@
 [
   {
+    "version": "1.3.6",
+    "tag": "v1.3.6",
+    "name": "v1.3.6",
+    "channel": "stable",
+    "published_at": "2026-11-12T10:20:55Z",
+    "release_url": "https://github.com/zhpelo/shopagg-b2b-website/releases/tag/v1.3.6",
+    "notes": [
+      "更新产品分类查询，支持同时获取当前分类及其后代分类中的已上架产品",
+      "优化插件管理功能，自动同步插件信息并处理不可用插件，保留设置和数据",
+      "增强数据库操作的错误处理，添加异常抛出以提高稳定性",
+      "重构 AppStoreController 和 PluginAdminController，使其利用 AppStoreCatalog 服务来加载应用商店数据。",
+      "引入 AppStoreCatalog 服务，用于处理目录加载及缓存逻辑。",
+      "更新 AppStoreController，使其通过 AppStoreCatalog 获取主题和插件。",
+      "在 AppStoreController 中实现分页功能，以便更方便地浏览各项内容。",
+      "重构 PluginAdminController，使其利用 AppStoreCatalog 检查插件更新。",
+      "优化应用商店和插件管理页面的视图，增加更新提示及分页显示。",
+      "改进 AppStoreClient，简化资源列表获取流程并完善错误处理机制。"
+    ],
+    "package": {
+      "url": "https://github.com/zhpelo/shopagg-b2b-website/archive/refs/tags/v1.3.6.zip",
+      "sha256": null,
+      "size": null
+    }
+  },
+  {
     "version": "1.3.5",
     "tag": "v1.3.5",
     "name": "v1.3.5",
     "channel": "stable",
     "published_at": "2026-11-03T13:44:24Z",
     "release_url": "https://github.com/zhpelo/shopagg-b2b-website/releases/tag/v1.3.5",
-    "notes": [
-      "重构插件管理系统",
-      "添加本地插件发现功能",
-      "更新插件管理界面",
-      "增强媒体上传功能，添加处理消息并优化上传反馈",
-      "更新管理界面中的“网站模板”标签为“网站主题”",
-      "调整主题和应用列表的布局",
-      "优化应用与主题展示，调整安装和版本信息的显示逻辑",
-      "更新文档和代码中的品牌名称为SHOPAGG CMS，优化相关描述"
-    ],
+    "notes": [],
     "package": {
       "url": "https://github.com/zhpelo/shopagg-b2b-website/archive/refs/tags/v1.3.5.zip",
       "sha256": null,
